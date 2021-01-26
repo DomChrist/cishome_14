@@ -80,7 +80,7 @@ export class AppMenuitemComponent implements OnInit, OnDestroy {
 
     key: string;
 
-    constructor(public app: AppMainComponent, public router: Router, private cd: ChangeDetectorRef, private menuService: MenuService) {
+    constructor(public appMain: AppMainComponent, public router: Router, private cd: ChangeDetectorRef, private menuService: MenuService) {
         this.menuSourceSubscription = this.menuService.menuSource$.subscribe(key => {
             // deactivate current active menu
             if (this.active && this.key !== key && key.indexOf(this.key) !== 0) {
@@ -133,8 +133,8 @@ export class AppMenuitemComponent implements OnInit, OnDestroy {
             this.active = true;
 
             // hide overlay menus
-            if (this.app.overlay) {
-                this.app.sidebarActive = false;
+            if (this.appMain.overlay) {
+                this.appMain.sidebarActive = false;
             }
         }
     }

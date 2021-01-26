@@ -1,19 +1,16 @@
 import {Component, AfterViewInit, Renderer2, OnInit, OnDestroy} from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
+import {AppComponent} from './app.component';
 
 @Component({
     selector: 'app-main',
     templateUrl: './app.main.component.html'
 })
-export class AppMainComponent implements AfterViewInit, OnInit, OnDestroy {
+export class AppMainComponent implements AfterViewInit, OnDestroy {
 
     activeTabIndex: number;
 
     sidebarActive: boolean;
-
-    layoutMode = 'static';
-
-    darkMenu = false;
 
     topbarMenuActive: boolean;
 
@@ -29,17 +26,7 @@ export class AppMainComponent implements AfterViewInit, OnInit, OnDestroy {
 
     configClick: boolean;
 
-    inputStyle = 'outlined';
-
-    ripple = true;
-
-    compactMode = false;
-
-    constructor(public renderer: Renderer2, private primengConfig: PrimeNGConfig) {}
-
-    ngOnInit() {
-        this.primengConfig.ripple = true;
-    }
+    constructor(public renderer: Renderer2, private primengConfig: PrimeNGConfig, public app: AppComponent) {}
 
     ngAfterViewInit() {
         this.documentClickListener = this.renderer.listen('body', 'click', (event) => {
@@ -108,11 +95,12 @@ export class AppMainComponent implements AfterViewInit, OnInit, OnDestroy {
     }
 
     onRippleChange(event) {
-        this.ripple = event.checked;
+        this.app.ripple = event.checked;
+        this.primengConfig = event.checked;
     }
 
     get overlay(): boolean {
-        return this.layoutMode === 'overlay';
+        return this.app.layoutMode === 'overlay';
     }
 
     isDesktop() {

@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {AppMainComponent} from './app.main.component';
 
 @Component({
     selector: 'app-menu',
@@ -14,8 +13,6 @@ import {AppMainComponent} from './app.main.component';
 export class AppMenuComponent implements OnInit {
 
     public model: any[];
-
-    constructor(public app: AppMainComponent) {}
 
     ngOnInit() {
         this.model = [

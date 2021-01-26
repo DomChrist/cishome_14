@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
+import {AppComponent} from './app.component';
 import {AppMainComponent} from './app.main.component';
 
 @Component({
     selector: 'app-config',
     template: `
-        <div class="layout-config" [ngClass]="{'layout-config-active': app.configActive}" (click)="app.onConfigClick($event)">
+        <div class="layout-config" [ngClass]="{'layout-config-active': appMain.configActive}" (click)="appMain.onConfigClick($event)">
             <a style="cursor: pointer" id="layout-config-button" class="layout-config-button" (click)="onConfigButtonClick($event)">
                 <i class="pi pi-cog"></i>
             </a>
@@ -25,7 +26,7 @@ import {AppMainComponent} from './app.main.component';
                 </div>
 
                 <h5>Ripple Effect</h5>
-                <p-inputSwitch [ngModel]="app.ripple" (onChange)="app.onRippleChange($event)"></p-inputSwitch>
+                <p-inputSwitch [ngModel]="app.ripple" (onChange)="appMain.onRippleChange($event)"></p-inputSwitch>
 
                 <h5>Menu Type</h5>
                 <div class="p-field-radiobutton">
@@ -75,7 +76,7 @@ export class AppConfigComponent implements OnInit {
 
     themeColor = 'blue-grey';
 
-    constructor(public app: AppMainComponent) {
+    constructor(public app: AppComponent, public appMain: AppMainComponent) {
     }
 
     ngOnInit() {
@@ -146,12 +147,12 @@ export class AppConfigComponent implements OnInit {
     }
 
     onConfigButtonClick(event) {
-        this.app.configActive = !this.app.configActive;
+        this.appMain.configActive = !this.appMain.configActive;
         event.preventDefault();
     }
 
     onConfigCloseClick(event) {
-        this.app.configActive = false;
+        this.appMain.configActive = false;
         event.preventDefault();
     }
 }
