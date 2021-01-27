@@ -12,21 +12,18 @@ import {AppMainComponent} from './app.main.component';
     /* tslint:enable:component-selector */
     template: `
 		<ng-container>
-			<a [attr.href]="item.url" (click)="itemClick($event)" *ngIf="!item.routerLink || item.items"
-			   (keydown.enter)="itemClick($event)"
-			   [attr.target]="item.target" [attr.tabindex]="0" pRipple (mouseenter)="hover=true"
-			   (mouseleave)="hover=false">
-				<i [ngClass]="item.icon"></i>
+			<a [attr.href]="item.url" (click)="itemClick($event)" *ngIf="!item.routerLink || item.items" (keydown.enter)="itemClick($event)"
+			   [attr.target]="item.target" [attr.tabindex]="0" pRipple (mouseenter)="hover=true" (mouseleave)="hover=false" [ngClass]="item.class">
+				<i [ngClass]="item.icon" class="layout-menuitem-icon"></i>
 				<span>{{item.label}}</span>
 				<span class="ink" *ngIf="hover"></span>
 				<span class="menuitem-badge" *ngIf="item.badge">{{item.badge}}</span>
 				<i class="pi pi-fw pi-angle-down submenu-toggler" *ngIf="item.items"></i>
 			</a>
-			<a (click)="itemClick($event)" (mouseenter)="hover=true" (mouseleave)="hover=false"
-			   *ngIf="item.routerLink && !item.items"
-			   [routerLink]="item.routerLink" routerLinkActive="active-menuitem-routerlink" pRipple
+			<a (click)="itemClick($event)" (mouseenter)="hover=true" (mouseleave)="hover=false" *ngIf="item.routerLink && !item.items"
+               [ngClass]="item.class" [routerLink]="item.routerLink" routerLinkActive="active-menuitem-routerlink" pRipple
 			   [routerLinkActiveOptions]="{exact: true}" [attr.target]="item.target" [attr.tabindex]="0">
-                <i [ngClass]="item.icon"></i>
+                <i [ngClass]="item.icon" class="layout-menuitem-icon"></i>
 				<span>{{item.label}}</span>
 				<span class="ink" *ngIf="hover"></span>
 				<span class="menuitem-badge" *ngIf="item.badge">{{item.badge}}</span>
