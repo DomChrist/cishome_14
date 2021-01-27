@@ -130,7 +130,7 @@ export class AppMenuitemComponent implements OnInit, OnDestroy {
             this.active = true;
 
             // hide overlay menus
-            if (this.appMain.overlay) {
+            if (this.appMain.overlay || !this.appMain.isDesktop()) {
                 this.appMain.sidebarActive = false;
             }
         }
