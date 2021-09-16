@@ -12,7 +12,7 @@ import {AppMainComponent} from './app.main.component';
     /* tslint:enable:component-selector */
     template: `
 		<ng-container>
-			<a [attr.href]="item.url" (click)="itemClick($event)" *ngIf="!item.routerLink || item.items" (keydown.enter)="itemClick($event)"
+			<a [attr.href]="item.url" (click)="itemClick($event)" *ngIf="(!item.routerLink || item.items) && item.visible !== false" (keydown.enter)="itemClick($event)"
 			   [attr.target]="item.target" [attr.tabindex]="0" pRipple (mouseenter)="hover=true" (mouseleave)="hover=false" [ngClass]="item.class">
 				<i [ngClass]="item.icon" class="layout-menuitem-icon"></i>
 				<span>{{item.label}}</span>
@@ -20,7 +20,7 @@ import {AppMainComponent} from './app.main.component';
 				<span class="menuitem-badge" *ngIf="item.badge">{{item.badge}}</span>
 				<i class="pi pi-fw pi-angle-down submenu-toggler" *ngIf="item.items"></i>
 			</a>
-			<a (click)="itemClick($event)" (mouseenter)="hover=true" (mouseleave)="hover=false" *ngIf="item.routerLink && !item.items"
+			<a (click)="itemClick($event)" (mouseenter)="hover=true" (mouseleave)="hover=false" *ngIf="(item.routerLink && !item.items) && item.visible !== false"
                [ngClass]="item.class" [routerLink]="item.routerLink" routerLinkActive="active-menuitem-routerlink" pRipple
 			   [routerLinkActiveOptions]="{exact: true}" [attr.target]="item.target" [attr.tabindex]="0">
                 <i [ngClass]="item.icon" class="layout-menuitem-icon"></i>
@@ -29,7 +29,7 @@ import {AppMainComponent} from './app.main.component';
 				<span class="menuitem-badge" *ngIf="item.badge">{{item.badge}}</span>
 				<i class="pi pi-fw pi-angle-down submenu-toggler" *ngIf="item.items"></i>
 			</a>
-			<ul *ngIf="item.items && active" [@children]="(active ? 'visibleAnimated' : 'hiddenAnimated')">
+			<ul *ngIf="(item.items && active) && item.visible !== false" [@children]="(active ? 'visibleAnimated' : 'hiddenAnimated')">
 				<ng-template ngFor let-child let-i="index" [ngForOf]="item.items">
 					<li app-menuitem [item]="child" [index]="i" [parentKey]="key" [class]="child.badgeClass"></li>
 				</ng-template>
@@ -111,7 +111,7 @@ export class AppMenuitemComponent implements OnInit, OnDestroy {
         // avoid processing disabled items
         if (this.item.disabled) {
             event.preventDefault();
-            return true;
+            return;
         }
 
         // notify other items

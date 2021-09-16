@@ -31,7 +31,10 @@ export class DashboardDemoComponent implements OnInit {
     ngOnInit() {
         this.productService.getProducts().then(data => this.products = data);
 
-        this.eventService.getEvents().then(events => {this.events = events; });
+        this.eventService.getEvents().then(events => {
+            this.events = events;
+            this.fullcalendarOptions = {...this.fullcalendarOptions, ...{events: events}};
+        });
 
         this.cities = [];
         this.cities.push({label: 'Select City', value: null});
@@ -48,13 +51,15 @@ export class DashboardDemoComponent implements OnInit {
                     label: 'First Dataset',
                     data: [65, 59, 80, 81, 56, 55, 40],
                     fill: false,
-                    borderColor: '#FFC107'
+                    borderColor: '#FFC107',
+                    tension: .4
                 },
                 {
                     label: 'Second Dataset',
                     data: [28, 48, 40, 19, 86, 27, 90],
                     fill: false,
-                    borderColor: '#03A9F4'
+                    borderColor: '#03A9F4',
+                    tension: .4
                 }
             ]
         };
@@ -65,13 +70,16 @@ export class DashboardDemoComponent implements OnInit {
         ];
 
         this.fullcalendarOptions = {
-            plugins: [ dayGridPlugin, timeGridPlugin, interactionPlugin ],
-            defaultDate: '2017-02-12',
-            header: {
-                left: 'prev,next',
+            initialDate: '2021-02-01',
+            headerToolbar: {
+                left: 'prev,next today',
                 center: 'title',
                 right: 'dayGridMonth,timeGridWeek,timeGridDay'
-            }
+            },
+            editable: true,
+            selectable: true,
+            selectMirror: true,
+            dayMaxEvents: true,
         };
     }
 }
