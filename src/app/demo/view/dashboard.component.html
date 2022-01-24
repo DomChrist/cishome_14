@@ -1,30 +1,30 @@
-<div class="p-grid dashboard">
-    <div class="p-col-12 p-md-6 p-lg-3">
-        <div class="p-grid p-nogutter card overview-box overview-box-1">
+<div class="grid dashboard">
+    <div class="col-12 md:col-6 lg:col-3">
+        <div class="grid grid-nogutter card overview-box overview-box-1">
             <span class="overview-box-name">Unread Messages</span>
             <span class="overview-box-count">150</span>
             <span class="overview-box-badge">+30%</span>
             <img src="assets/layout/images/dashboard/chart-1.svg" />
         </div>
     </div>
-    <div class="p-col-12 p-md-6 p-lg-3">
-        <div class="p-grid p-nogutter card overview-box overview-box-2">
+    <div class="col-12 md:col-6 lg:col-3">
+        <div class="grid grid-nogutter card overview-box overview-box-2">
             <span class="overview-box-name">Check-Ins</span>
             <span class="overview-box-count">532</span>
             <span class="overview-box-badge">+45%</span>
             <img src="assets/layout/images/dashboard/chart-2.svg" />
         </div>
     </div>
-    <div class="p-col-12 p-md-6 p-lg-3">
-        <div class="p-grid p-nogutter card overview-box overview-box-3">
+    <div class="col-12 md:col-6 lg:col-3">
+        <div class="grid grid-nogutter card overview-box overview-box-3">
             <span class="overview-box-name">Files Synced</span>
             <span class="overview-box-count">640</span>
             <span class="overview-box-badge">-75%</span>
             <img src="assets/layout/images/dashboard/chart-3.svg" />
         </div>
     </div>
-    <div class="p-col-12 p-md-6 p-lg-3">
-        <div class="p-grid p-nogutter card overview-box overview-box-4">
+    <div class="col-12 md:col-6 lg:col-3">
+        <div class="grid grid-nogutter card overview-box overview-box-4">
             <span class="overview-box-name">Users Online</span>
             <span class="overview-box-count">5251</span>
             <span class="overview-box-badge">25%</span>
@@ -32,7 +32,7 @@
         </div>
     </div>
 
-    <div class="p-col-12 p-lg-4">
+    <div class="col-12 lg:col-4">
         <div class="user-card p-shadow-content">
             <div class="user-card-header">
                 <img src="assets/layout/images/dashboard/user-card-header.png"/>
@@ -88,7 +88,7 @@
         </div>
     </div>
 
-    <div class="p-col-12 p-lg-8 chat">
+    <div class="col-12 lg:col-8 chat">
         <p-panel header="Chat" styleClass="p-shadow-content">
             <ul>
                 <li class="clearfix message-from">
@@ -130,24 +130,24 @@
         </p-panel>
     </div>
 
-    <div class="p-col-12 activity-feed">
+    <div class="col-12 activity-feed">
         <p-panel header="ACTIVITY FEED" styleClass="p-shadow-content">
             <h3>Last Activity</h3>
             <p>Updated 1 minute ago</p>
-            <div class="p-grid">
-                <div class="p-col-12 p-md-3">
+            <div class="grid">
+                <div class="col-12 md:col-3">
                     <span>INCOME</span>
                     <div class="knob income">$900</div>
                 </div>
-                <div class="p-col-12 p-md-3">
+                <div class="col-12 md:col-3">
                     <span>TAX</span>
                     <div class="knob tax">$250</div>
                 </div>
-                <div class="p-col-12 p-md-3">
+                <div class="col-12 md:col-3">
                     <span>INVOICES</span>
                     <div class="knob invoice">$125</div>
                 </div>
-                <div class="p-col-12 p-md-3">
+                <div class="col-12 md:col-3">
                     <span>EXPENSES</span>
                     <div class="knob expense">$250</div>
                 </div>
@@ -155,7 +155,7 @@
         </p-panel>
     </div>
 
-    <div class="p-col-12 p-md-6 p-lg-4 task-list">
+    <div class="col-12 md:col-6 lg:col-4 task-list">
         <p-panel header="Tasks" styleClass="p-shadow-content">
             <ul>
                 <li>
@@ -201,19 +201,19 @@
             </ul>
         </p-panel>
     </div>
-    <div class="p-col-12 p-md-6 p-lg-4 p-fluid contact-form">
+    <div class="col-12 md:col-6 lg:col-4 p-fluid contact-form">
         <p-panel header="Contact Us" styleClass="p-shadow-content">
-            <div class="p-grid">
-                <div class="p-col-12">
+            <div class="grid">
+                <div class="col-12">
                     <p-dropdown [options]="cities" [(ngModel)]="selectedCity"></p-dropdown>
                 </div>
-                <div class="p-col-12">
+                <div class="col-12">
                     <span class="p-float-label">
                         <input id="name" type="text" pInputText />
                         <label for="name">Name</label>
                     </span>
                 </div>
-                <div class="p-col-12">
+                <div class="col-12">
                     <span class="p-float-label">
                         <input id="age" type="text" pInputText />
                         <label for="age">Age</label>
@@ -224,7 +224,7 @@
         </p-panel>
     </div>
 
-    <div class="p-col-12 p-lg-4 contacts">
+    <div class="col-12 lg:col-4 contacts">
         <p-panel header="Contacts" [style]="{'min-height':'360px'}" styleClass="p-shadow-content">
             <ul>
                 <li class="clearfix">
@@ -291,14 +291,14 @@
         </p-panel>
     </div>
 
-    <div class="p-col-12 p-md-4">
+    <div class="col-12 md:col-4">
         <div class="card timeline p-fluid">
-            <div class="p-grid">
-                <div class="p-col-3">
+            <div class="grid">
+                <div class="col-3">
                     <span class="event-time">just now</span>
                     <i class="pi pi-map-marker" style="color:#009688"></i>
                 </div>
-                <div class="p-col-9">
+                <div class="col-9">
                     <span class="event-owner" style="color:#009688">Katherine May</span>
                     <span class="event-text">Lorem ipsun dolor amet</span>
                     <div class="event-content">
@@ -306,29 +306,29 @@
                     </div>
                 </div>
 
-                <div class="p-col-3">
+                <div class="col-3">
                     <span class="event-time">12h ago</span>
                     <i class="pi pi-star" style="color:#E91E63"></i>
                 </div>
-                <div class="p-col-9">
+                <div class="col-9">
                     <span class="event-owner" style="color:#E91E63">Brandon Santos</span>
                     <span class="event-text">Ab nobis, magnam sunt eum. Laudantium, repudiandae, similique!.</span>
                 </div>
 
-                <div class="p-col-3">
+                <div class="col-3">
                     <span class="event-time">15h ago</span>
                     <i class="pi pi-comment" style="color:#9c27b0"></i>
                 </div>
-                <div class="p-col-9">
+                <div class="col-9">
                     <span class="event-owner" style="color:#9c27b0">Stephan Ward</span>
                     <span class="event-text">Omnis veniam quibusdam ratione est repellat qui nam quisquam ab mollitia dolores ullam voluptates, similique, dignissimos.</span>
                 </div>
 
-                <div class="p-col-3">
+                <div class="col-3">
                     <span class="event-time">2d ago</span>
                     <i class="pi pi-globe" style="color:#ff9800"></i>
                 </div>
-                <div class="p-col-9">
+                <div class="col-9">
                     <span class="event-owner" style="color:#ff9800">Jason Smith</span>
                     <span class="event-text">Laudantium, repudiandae, similique!</span>
                     <div class="event-content">
@@ -336,32 +336,32 @@
                     </div>
                 </div>
 
-                <div class="p-col-3">
+                <div class="col-3">
                     <span class="event-time">1w ago</span>
                     <i class="pi pi-heart" style="color:#607d8b"></i>
                 </div>
-                <div class="p-col-9">
+                <div class="col-9">
                     <span class="event-owner">Kevin Cox</span>
                     <span class="event-text">Quibusdam ratione est repellat qui nam quisquam veniam quibusdam ratione.</span>
                 </div>
 
-                <div class="p-col-3">
+                <div class="col-3">
                     <span class="event-time">2w ago</span>
                     <i class="pi pi-compass" style="color:#FFC107"></i>
                 </div>
-                <div class="p-col-9">
+                <div class="col-9">
                     <span class="event-owner" style="color:#FFC107">Walter White</span>
                     <span class="event-text">I am the one who knocks!</span>
                 </div>
 
-                <div class="p-col-12">
+                <div class="col-12">
                     <button type="button" label="Refresh" icon="pi pi-refresh" pButton></button>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="p-col-12 p-md-8">
+    <div class="col-12 md:col-8">
         <div class="card">
             <p-table [value]="products" [paginator]="true" [rows]="5">
                 <ng-template pTemplate="header">
@@ -388,8 +388,8 @@
                         <td>{{product.category}}</td>
                         <td>{{product.price | currency:'USD'}}</td>
                         <td style="text-align: center">
-                            <button pButton type="button" icon="pi pi-search" class="p-button-success p-mr-2 p-mb-1"></button>
-                            <button pButton type="button" icon="pi pi-times" class="p-button-danger p-mb-1"></button>
+                            <button pButton type="button" icon="pi pi-search" class="p-button-success mr-2 mb-1"></button>
+                            <button pButton type="button" icon="pi pi-times" class="p-button-danger mb-1"></button>
                         </td>
                     </tr>
                 </ng-template>
@@ -403,62 +403,62 @@
         </div>
     </div>
 
-    <div class="p-col-12 p-md-8">
+    <div class="col-12 md:col-8">
         <p-panel header="Calendar" [style]="{'height':'100%'}">
             <full-calendar [options]="fullcalendarOptions" ></full-calendar>
         </p-panel>
     </div>
-    <div class="p-col-12 p-md-4">
+    <div class="col-12 md:col-4">
         <p-panel header="Activity" [style]="{'height':'100%'}">
             <div class="activity-header">
-                <div class="p-grid">
-                    <div class="p-col-6">
+                <div class="grid">
+                    <div class="col-6">
                         <span style="font-weight:bold">Last Activity</span>
                         <p>Updated 1 minute ago</p>
                     </div>
-                    <div class="p-col-6" style="text-align:right">
+                    <div class="col-6" style="text-align:right">
                         <button type="button" label="Update" icon="pi pi-refresh" pButton></button>
                     </div>
                 </div>
             </div>
             <ul class="activity-list">
                 <li>
-                    <div class="p-d-flex p-jc-between p-ai-center p-mb-3">
+                    <div class="p-d-flex justify-content-between align-items-center mb-3">
                         <h5 class="activity p-m-0">Income</h5>
                         <div class="count">$900</div>
                     </div>
                     <p-progressBar value="95" [showValue]="false"></p-progressBar>
                 </li>
                 <li>
-                    <div class="p-d-flex p-jc-between p-ai-center p-mb-3">
+                    <div class="p-d-flex justify-content-between align-items-center mb-3">
                         <h5 class="activity p-m-0">Tax</h5>
                         <div class="count" style="background-color:#f9c851">$250</div>
                     </div>
                     <p-progressBar value="24" [showValue]="false"></p-progressBar>
                 </li>
                 <li>
-                    <div class="p-d-flex p-jc-between p-ai-center p-mb-3">
+                    <div class="p-d-flex justify-content-between align-items-center mb-3">
                         <h5 class="activity p-m-0">Invoices</h5>
                         <div class="count" style="background-color:#20d077">$125</div>
                     </div>
                     <p-progressBar value="55" [showValue]="false"></p-progressBar>
                 </li>
                 <li>
-                    <div class="p-d-flex p-jc-between p-ai-center p-mb-3">
+                    <div class="p-d-flex justify-content-between align-items-center mb-3">
                         <h5 class="activity p-m-0">Expenses</h5>
                         <div class="count" style="background-color:#f9c851">$250</div>
                     </div>
                     <p-progressBar value="15" [showValue]="false"></p-progressBar>
                 </li>
                 <li>
-                    <div class="p-d-flex p-jc-between p-ai-center p-mb-3">
+                    <div class="p-d-flex justify-content-between align-items-center mb-3">
                         <h5 class="activity p-m-0">Bonus</h5>
                         <div class="count" style="background-color:#007be5">$350</div>
                     </div>
                     <p-progressBar value="5" [showValue]="false"></p-progressBar>
                 </li>
                 <li>
-                    <div class="p-d-flex p-jc-between p-ai-center p-mb-3">
+                    <div class="p-d-flex justify-content-between align-items-center mb-3">
                         <h5 class="activity p-m-0">Revenue</h5>
                         <div class="count" style="background-color:#ef6262">$500</div>
                     </div>

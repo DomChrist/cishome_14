@@ -14,42 +14,42 @@ import {AppMainComponent} from './app.main.component';
             </a>
             <div class="layout-config-content">
                 <h5>Menu Type</h5>
-                <div class="p-field-radiobutton">
+                <div class="field-radiobutton">
                     <p-radioButton name="menuMode" value="static" [(ngModel)]="app.layoutMode" inputId="mode1"></p-radioButton>
                     <label for="mode1">Static</label>
                 </div>
-                <div class="p-field-radiobutton">
+                <div class="field-radiobutton">
                     <p-radioButton name="menuMode" value="overlay" [(ngModel)]="app.layoutMode" inputId="mode2"></p-radioButton>
                     <label for="mode2">Overlay</label>
                 </div>
 
                 <h5>Menu Colors</h5>
-                <div class="p-field-radiobutton">
+                <div class="field-radiobutton">
                     <p-radioButton name="darkMenu" [value]="true" [(ngModel)]="app.darkMenu" inputId="darkMenu1"></p-radioButton>
                     <label for="darkMenu1">Dark</label>
                 </div>
-                <div class="p-field-radiobutton">
+                <div class="field-radiobutton">
                     <p-radioButton name="darkMenu" [value]="false" [(ngModel)]="app.darkMenu" inputId="darkMenu2"></p-radioButton>
                     <label for="darkMenu2">Light</label>
                 </div>
 
                 <h5>Theme Modes</h5>
-                <div class="p-field-radiobutton">
+                <div class="field-radiobutton">
                     <p-radioButton name="compactMode" [value]="true" [(ngModel)]="app.compactMode" inputId="compactMode1" (onClick)="changeThemeStyle($event, true)"></p-radioButton>
                     <label for="compactMode1">Compact</label>
                 </div>
-                <div class="p-field-radiobutton">
+                <div class="field-radiobutton">
                     <p-radioButton name="compactMode" [value]="false" [(ngModel)]="app.compactMode" inputId="compactMode2" (onClick)="changeThemeStyle($event, false)"></p-radioButton>
                     <label for="compactMode2">Standart</label>
                 </div>
 
                 <h5 style="margin-top: 0">Input Style</h5>
-                <div class="p-formgroup-inline">
-                    <div class="p-field-radiobutton">
+                <div class="formgroup-inline">
+                    <div class="field-radiobutton">
                         <p-radioButton name="inputStyle" value="outlined" [(ngModel)]="app.inputStyle" inputId="inputStyle1"></p-radioButton>
                         <label for="inputStyle1">Outlined</label>
                     </div>
-                    <div class="p-field-radiobutton">
+                    <div class="field-radiobutton">
                         <p-radioButton name="inputStyle" value="filled" [(ngModel)]="app.inputStyle" inputId="inputStyle2"></p-radioButton>
                         <label for="inputStyle2">Filled</label>
                     </div>

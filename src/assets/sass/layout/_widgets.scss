@@ -71,7 +71,7 @@
         font-size: 13px;
     }
 
-    .p-col-12 {
+    .col-12 {
         padding: 20px;
 
         span {
@@ -117,8 +117,8 @@
     height: 100%;
     box-sizing: border-box;
 
-    > .p-grid {
-        .p-col-3 {
+    > .grid {
+        .col-3 {
             font-size: 14px;
             position: relative;
             border-right: 1px solid #bdbdbd;
@@ -132,12 +132,9 @@
             }
         }
 
-        .p-col-9 {
+        .col-9 {
             padding-left: 1.5em;
-            .event-owner {
-
-            }
-
+            
             .event-text {
                 color: $textSecondaryColor;
                 font-size: 14px;
@@ -331,11 +328,11 @@
             margin: 0;
         }
 
-        .p-col-6:first-child {
+        .col-6:first-child {
             text-align: left;
         }
 
-        .p-col-6:last-child {
+        .col-6:last-child {
             text-align: right;
         }
     }
@@ -375,7 +372,7 @@
             background-color: #757575;
             padding: 20px;
 
-            .p-col-12 {
+            .col-12 {
                 padding: 10px;
                 text-align: left;
             }

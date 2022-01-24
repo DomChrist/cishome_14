@@ -113,7 +113,7 @@
             min-height: 360px;
         }
 
-        .p-col-12 {
+        .col-12 {
             padding: 20px 10px;
         }
     }
@@ -219,7 +219,7 @@
             width: 100%;
         }
 
-        .p-col-12 {
+        .col-12 {
             padding: 20px;
 
             span {
@@ -467,8 +467,8 @@
         height: 100%;
         box-sizing: border-box;
 
-        > .p-grid {
-            .p-col-3 {
+        > .grid {
+            .col-3 {
                 font-size: 14px;
                 position: relative;
                 border-right: 1px solid #bdbdbd;
@@ -482,12 +482,9 @@
                 }
             }
 
-            .p-col-9 {
+            .col-9 {
                 padding-left: 1.5em;
-                .event-owner {
-
-                }
-
+                
                 .event-text {
                     color: $textSecondaryColor;
                     font-size: 14px;

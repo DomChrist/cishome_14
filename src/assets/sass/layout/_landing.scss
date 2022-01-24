@@ -153,7 +153,7 @@
                     display: block;
                 }
 
-                .p-col-12:last-child {
+                .col-12:last-child {
                     text-align: right;
 
                     .p-button {
@@ -234,11 +234,11 @@
                             margin: 0;
                         }
 
-                        .p-col-6:first-child {
+                        .col-6:first-child {
                             text-align: left;
                         }
 
-                        .p-col-6:last-child {
+                        .col-6:last-child {
                             text-align: right;
                         }
                     }
@@ -277,7 +277,7 @@
                             background-color: #f5f5f5;
                             padding: 20px;
 
-                            .p-col-12 {
+                            .col-12 {
                                 padding: 24px;
                                 text-align: left;
                             }
@@ -339,7 +339,7 @@
                             background-color: #757575;
                             padding: 20px;
 
-                            .p-col-12 {
+                            .col-12 {
                                 padding: 10px;
                                 text-align: left;
                             }
