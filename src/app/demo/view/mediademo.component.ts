@@ -5,7 +5,6 @@ import { Product } from '../domain/product';
 
 @Component({
     templateUrl: './mediademo.component.html',
-    styleUrls: ['./mediademo.scss'],
 })
 export class MediaDemoComponent implements OnInit{
 

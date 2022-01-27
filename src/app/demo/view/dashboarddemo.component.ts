@@ -3,9 +3,6 @@ import {EventService} from '../service/eventservice';
 import {Product} from '../domain/product';
 import {ProductService} from '../service/productservice';
 import {SelectItem, MenuItem} from 'primeng/api';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import timeGridPlugin from '@fullcalendar/timegrid';
-import interactionPlugin from '@fullcalendar/interaction';
 
 @Component({
     templateUrl: './dashboard.component.html'

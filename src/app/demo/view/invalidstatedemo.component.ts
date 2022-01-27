@@ -6,7 +6,6 @@ import {CountryService} from '../service/countryservice';
 })
 export class InvalidStateDemoComponent implements OnInit {
 
-
     countries: any[];
 
     cities: any[];
@@ -30,6 +29,8 @@ export class InvalidStateDemoComponent implements OnInit {
     value8: any;
 
     value9: any;
+
+    value10: any;
 
     constructor(private countryService: CountryService) {
         this.cities = [

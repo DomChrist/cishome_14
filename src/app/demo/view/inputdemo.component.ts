@@ -4,36 +4,57 @@ import {SelectItem} from 'primeng/api';
 
 @Component({
     templateUrl: './inputdemo.component.html',
-    styles: [`:host ::ng-deep .p-multiselect {
-		min-width: 15rem;
-	}
+    styles: [`
+        :host ::ng-deep .p-multiselect {
+            min-width: 15rem;
+        }
 
-	:host ::ng-deep .multiselect-custom .country-item.country-item-value {
-		padding: .25rem .5rem;
-		border-radius: 3px;
-		display: inline-flex;
-		margin-right: .5rem;
-		background-color: var(--primary-color);
-		color: var(--primary-color-text);
-	}
+        :host ::ng-deep .multiselect-custom .country-item.country-item-value {
+            padding: .25rem .5rem;
+            border-radius: 3px;
+            display: inline-flex;
+            margin-right: .5rem;
+            background-color: var(--primary-color);
+            color: var(--primary-color-text);
+        }
 
-	:host ::ng-deep .multiselect-custom .country-item.country-item-value img.flag {
-		width: 17px;
-	}
+        :host ::ng-deep .multiselect-custom .country-item.country-item-value img.flag {
+            width: 17px;
+        }
 
-	:host ::ng-deep .multiselect-custom .country-item {
-		display: flex;
-		align-items: center;
-	}
+        :host ::ng-deep .multiselect-custom .country-item {
+            display: flex;
+            align-items: center;
+        }
 
-	:host ::ng-deep .multiselect-custom .country-item img.flag {
-		width: 18px;
-		margin-right: .5rem;
-	}
+        :host ::ng-deep .multiselect-custom .country-item img.flag {
+            width: 18px;
+            margin-right: .5rem;
+        }
 
-	:host ::ng-deep .p-colorpicker {
-		width: 2.5em
-	}
+        :host ::ng-deep .p-colorpicker {
+            width: 2.5em
+        }
+
+        :host ::ng-deep .p-inputswitch {
+            .p-inputswitch-slider:before {
+                transition-property: box-shadow transform;
+                box-shadow: 0px 3px 1px -2px rgba(#000, 0.2), 0px 2px 2px 0px rgba(#000, 0.14), 0px 1px 5px 0px rgba(#000,.12);
+            }
+        
+            &:not(.p-disabled):hover {
+                .p-inputswitch-slider:before {
+                    box-shadow: 0px 3px 1px -2px rgba(#000, 0.2), 0px 2px 2px 0px rgba(#000, 0.14), 0px 1px 5px 0px rgba(#000,.12), 0 0 1px 10px rgba(#000, .04), 
+                }
+            }
+        
+            &.p-inputswitch-focus,
+            &.p-inputswitch-focus:not(.p-disabled):hover  {
+                .p-inputswitch-slider:before {
+                    box-shadow: 0 0 1px 10px rgba(#000, .12), 0px 3px 1px -2px rgba(#000, 0.2), 0px 2px 2px 0px rgba(#000, 0.14), 0px 1px 5px 0px rgba(#000,.12);
+                }
+            }
+        }
     `]
 })
 export class InputDemoComponent implements OnInit{

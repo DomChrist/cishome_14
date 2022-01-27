@@ -1,5 +1,9 @@
 # Changelog
 
+## 13.1.0
+**Migration Guide**
+- Update PrimeFlex v3.
+
 ## 13.0.0
 **Migration Guide**
 - Update your project to Angular 13.
