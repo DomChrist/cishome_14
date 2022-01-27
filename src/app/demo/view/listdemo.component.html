@@ -5,7 +5,7 @@
 			<h5>DataView</h5>
 			<p-dataView #dv [value]="products" [paginator]="true" [rows]="9" filterBy="name" [sortField]="sortField" [sortOrder]="sortOrder" layout="grid">
 				<ng-template pTemplate="header">
-					<div class="grid grid-nogutter flex-column lg:flex-row justify-content-between">
+					<div class="grid grid-nogutter flex-column md:flex-row justify-content-between">
 						<p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By Price" (onChange)="onSortChange($event)"></p-dropdown>
 						<input type="search" pInputText placeholder="Search by Name" (input)="dv.filter($event.target.value)" class="my-3 md:my-0" style="max-width:200px;">
 						<p-dataViewLayoutOptions></p-dataViewLayoutOptions>
