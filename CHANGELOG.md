@@ -2,7 +2,8 @@
 
 ## 13.1.0
 **Migration Guide**
-- Update PrimeFlex v3.
+- Update PrimeFlex 3.1.2
+- Update to PrimeNG 13.1.0
 
 ## 13.0.0
 **Migration Guide**
