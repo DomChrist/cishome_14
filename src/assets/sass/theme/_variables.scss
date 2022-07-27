@@ -8,7 +8,9 @@ $colors: (
     "teal": #009688,
     "orange": #FF9800,
     "bluegray": #607D8B,
-    "purple": #9C27B0
+    "purple": #9C27B0,
+    "primary": $primaryColor
+
 ) !default;
 
 $emphasis-high:rgba(0,0,0.87) !default;
