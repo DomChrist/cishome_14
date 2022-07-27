@@ -41,13 +41,13 @@ import {SelectItem} from 'primeng/api';
                 transition-property: box-shadow transform;
                 box-shadow: 0px 3px 1px -2px rgba(#000, 0.2), 0px 2px 2px 0px rgba(#000, 0.14), 0px 1px 5px 0px rgba(#000,.12);
             }
-        
+
             &:not(.p-disabled):hover {
                 .p-inputswitch-slider:before {
-                    box-shadow: 0px 3px 1px -2px rgba(#000, 0.2), 0px 2px 2px 0px rgba(#000, 0.14), 0px 1px 5px 0px rgba(#000,.12), 0 0 1px 10px rgba(#000, .04), 
+                    box-shadow: 0px 3px 1px -2px rgba(#000, 0.2), 0px 2px 2px 0px rgba(#000, 0.14), 0px 1px 5px 0px rgba(#000,.12), 0 0 1px 10px rgba(#000, .04),
                 }
             }
-        
+
             &.p-inputswitch-focus,
             &.p-inputswitch-focus:not(.p-disabled):hover  {
                 .p-inputswitch-slider:before {
@@ -71,6 +71,8 @@ export class InputDemoComponent implements OnInit{
     valRadio: string;
 
     valCheck: string[] = [];
+
+    valCheck2: boolean;
 
     valSwitch: boolean;
 
