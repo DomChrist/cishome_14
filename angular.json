@@ -30,13 +30,15 @@
                             "src/upload.php"
                         ],
                         "styles": [
-                            "src/styles.scss"
+                            "src/styles.scss",
+                            "./node_modules/@fullcalendar/common/main.css",
+                            "./node_modules/@fullcalendar/daygrid/main.css",
+                            "./node_modules/@fullcalendar/timegrid/main.css"
                         ],
                         "scripts": [
                             "node_modules/prismjs/prism.js",
                             "node_modules/prismjs/components/prism-typescript.js"
-                        ],
-                        "allowedCommonJsDependencies": ["@fullcalendar/daygrid","@fullcalendar/timegrid","@fullcalendar/interaction","chart.js"]
+                        ]
                     },
                     "configurations": {
                         "production": {
@@ -126,5 +128,8 @@
             }
         }
     },
-    "defaultProject": "barcelona"
+    "defaultProject": "barcelona",
+    "cli": {
+      "analytics": "7b9ee132-7b80-4232-880f-39d44258a438"
+    }
 }
