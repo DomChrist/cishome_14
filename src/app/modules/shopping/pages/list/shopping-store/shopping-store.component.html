@@ -1,0 +1,113 @@
+<p-divider align="right">
+    <button pButton icon="pi pi-plus" (click)="showAddDialog = !showAddDialog" styleClass="p-button-outlined"></button>
+    <button pButton style="margin-left:3px" (click)="editMode = !editMode" icon="pi pi-pencil" styleClass="p-button-outlined"></button>
+    <button pButton style="margin-left:3px" icon="pi pi-shopping-cart" styleClass="p-button-outlined"></button>
+</p-divider>
+<div style="position: relative; top:-75px;">
+    <img alt="store" [src]="url(store.key)" style="width: 75px;">
+    <div style="position: relative; top:10px;">
+        <div style="">
+            <div style="">
+                <div class="grid">
+                    <div *ngFor="let i of open" class="col-6 md:col-3 lg:col-1 xl:col-1">
+                        <div *ngIf="false"
+                            style="float: left; background: red; height: 145px; width: 145px; padding: 10px; margin: 10px; ">
+                            <p>{{i.name}}</p>
+                        </div>
+
+                        <div *ngIf="true">
+                            <shopping-list-item-box [editModeEnabled]="editMode"
+                                                    (onBought)="onBought($event)"
+                                                    (onDelete)="onDelete($event)"
+                                                    [item]="i"></shopping-list-item-box>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="">
+                <p-divider>
+                    PURCHASED
+                </p-divider>
+                <div class="grid">
+                    <div *ngFor="let i of bought" class="col-6 md:col-3 lg:col-1 xl:col-1">
+
+
+
+
+                        <shopping-list-item-box [editModeEnabled]="editMode"
+                                                (onCancellation)="onCancellation(i)"
+                                                [item]="i"></shopping-list-item-box>
+                    </div>
+
+                    <div class="col-12">
+                        <div *ngIf="bought && bought.length > 0">
+                            <button
+                                pButton
+                                (click)="startSettlement()"
+                                label="ABRECHNEN"></button>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<p-sidebar
+    [(visible)]="showSettlement"
+    position="bottom">
+
+    <div>
+
+        <input
+            #settlementAmount
+            type="text"
+            (keydown.enter)="doSettlement(settlementAmount.value)"
+            pInputText>
+
+    </div>
+
+
+
+</p-sidebar>
+
+
+<p-sidebar
+    [(visible)]="showAddDialog"
+    [style]="{height:'90%'}"
+    position="bottom">
+
+    <div style="text-align: center">
+        <img [alt]="store.key" [src]="url(store.key)" style="width: 75px;">
+    </div>
+
+    <input type="text"
+           style="width: 96%"
+           pInputText
+           [(ngModel)]="add.itemName">
+
+    <div>
+        <p-selectButton [options]="countings" [(ngModel)]="amount" optionLabel="label" optionValue="value"></p-selectButton>
+    </div>
+
+    <div>
+
+    </div>
+
+    <div>
+
+        <button
+            pButton
+            (click)="addItem()"
+            style="width:100%"
+            icon="pi pi-plus"></button>
+
+    </div>
+
+</p-sidebar>

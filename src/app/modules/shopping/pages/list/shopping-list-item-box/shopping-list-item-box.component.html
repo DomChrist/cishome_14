@@ -1,0 +1,43 @@
+
+<div *ngIf="listItem" class="box col"
+     [class.bought]="bought"
+     [class.default]="!bought"
+     (click)="boughtAction()"  >
+    <div style="position: relative">
+
+    </div>
+
+
+    <h1>{{firstLetter}}</h1>
+
+    <h4>
+        <p>{{name}}</p>
+    </h4>
+
+    <div>
+        <p-badge
+            severity="info"
+            [class.p-badge-success]="bought"
+            [class.p-badge-danger]="!bought"
+            size="large" [value]="counter.toString()"></p-badge>
+    </div>
+
+</div>
+
+<div style="text-align: center">
+    <button *ngIf="editMode"
+            [disabled]="counter <= 1"
+            (click)="minus()"
+            class="p-button-rounded p-button-outlined" pButton
+            icon="pi pi-minus"></button>
+    <button *ngIf="editMode"
+            (click)="delete()"
+            class="p-button-rounded p-button-danger" pButton
+            icon="pi pi-trash"></button>
+    <button *ngIf="editMode"
+            (click)="plus()"
+            class="p-button-rounded p-button-outlined" pButton
+            icon="pi pi-plus"></button>
+
+</div>
+

@@ -1,0 +1,8 @@
+<div *ngFor="let l of lists">
+    <p-card>
+        <div class="card-item" (click)="route(l)" >
+            <img style="width: 45px;" src="assets/icons/flaticon/task-list.png">
+            <label class="list-item" >{{l.name}}</label>
+        </div>
+    </p-card>
+</div>

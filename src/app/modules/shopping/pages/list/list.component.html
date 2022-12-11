@@ -1,0 +1,40 @@
+
+
+
+<div style="margin-bottom: 95px;">
+
+    <shopping-stores *ngIf="items && items.stores" [stores]="items.stores"></shopping-stores>
+
+</div>
+
+
+<p-toast position="bottom-center" ></p-toast>
+
+<p-card>
+    <div style="position:fixed; bottom:0px; left: 0px; width: 100%">
+        <div>
+            <button
+                pButton
+                style="width: 100%"
+                class="p-button-link"
+                (click)="showCreateDialog = !showCreateDialog"
+                icon="pi pi-chevron-up"></button>
+        </div>
+        <input
+            [style]="{width:'calc(100% - 45px)'}"
+            [(ngModel)]="addShoppingItem.itemName"
+            placeholder="NAME"
+            maxlength="20"
+            (keyup.enter)="sendNewItem()"
+            pInputText
+        >
+        <button pButton
+                (click)="sendNewItem()"
+                class="p-button-rounded "
+                icon="pi pi-send"></button>
+    </div>
+</p-card>
+
+
+
+<shopping-add-sidebar [(visible)]="showCreateDialog" ></shopping-add-sidebar>

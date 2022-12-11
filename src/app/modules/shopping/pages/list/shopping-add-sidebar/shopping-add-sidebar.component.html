@@ -1,0 +1,55 @@
+<p-sidebar
+    position="bottom"
+    [(visible)]="visible"
+    [style]="{height:'95%'}"
+    title="NEW ITEM"
+    >
+
+    <label>add side bar</label>
+
+    <div>
+        <input type="text"
+               #itemInput
+               style="width: 90%"
+               pAutoFocus
+               (keydown.enter)="addItem(itemInput.value)"
+               [autofocus]="true"
+               pInputText>
+        <button
+            pButton
+            (click)="addItem( itemInput.value )"
+            style="width: 10%"
+            icon="pi pi-send"></button>
+    </div>
+
+    <div>
+        <p-selectButton [options]="items" [(ngModel)]="amount" (onChange)="selectAmount($event)" optionLabel="label" optionValue="value"></p-selectButton>
+    </div>
+
+    <div *ngIf="amount">
+        {{amount.value}}
+    </div>
+
+    <div class="grid" *ngIf="!selectedStore">
+        <div *ngFor="let s of stores.stores" class="col-6 md:col-3 xl:col-1 sm:col-6">
+            <p-card>
+                <div style="text-align: center">
+                    <img (click)="selectStore(s)" [alt]="s.store.name.name" [src]="storeImage(s.store.name.key)" style="width: 110px; height: 110px;">
+                </div>
+            </p-card>
+        </div>
+    </div>
+
+    <div class="grid">
+        <div *ngIf="selectedStore" class="col-12" style="text-align: center">
+            <p-card>
+                <div>
+                    <img (click)="selectedStore = null" [alt]="selectedStore.name.name" [src]="storeImage(selectedStore.name.key)" style="width: 110px; height: 110px;">
+                </div>
+            </p-card>
+        </div>
+    </div>
+
+
+
+</p-sidebar>

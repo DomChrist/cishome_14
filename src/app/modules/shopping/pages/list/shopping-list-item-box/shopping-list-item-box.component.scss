@@ -1,0 +1,47 @@
+.box{
+    width: 150px;
+    height: 150px;
+    text-align: center;
+    box-shadow: 2px 2px 4px 1px silver;
+    border-radius: 15px;
+    border-color: #f57c00;
+}
+
+.default{
+    background: #fd9a77;
+}
+
+.default h1{
+    color: azure;
+}
+
+.bought{
+    background: transparent;
+    border: 2px solid #35ae47;
+    color: #35ae47;
+}
+
+.bought h4 {
+    color: #35ae47;
+}
+
+h1 {
+    font-size: 4em;
+    margin: 0px;
+    margin-bottom: 0px;
+}
+
+h4 {
+    width: 100%;
+    margin: 0;
+    margin-bottom: 5px;
+    color: azure;
+}
+
+p {
+    width: 125px;
+
+    /* Both of the following are required for text-overflow */
+    white-space: nowrap;
+    overflow: hidden;
+}

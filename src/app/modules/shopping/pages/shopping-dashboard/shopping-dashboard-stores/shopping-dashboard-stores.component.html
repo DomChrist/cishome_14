@@ -1,0 +1,15 @@
+<p-card>
+<p-carousel [value]="store.stores" [numVisible]="5">
+    <ng-template let-store pTemplate="item">
+        <div>
+            <div style="text-align: center">
+                <img [src]="imagePath(store)" [alt]="store.store.name.name" class="product-image" style="width: 75px; height: 75px;" />
+            </div>
+            <div style="text-align: center">
+                <h4 class="mb-1">{{store.store.name.name}}</h4>
+            </div>
+        </div>
+    </ng-template>
+</p-carousel>
+</p-card>
+

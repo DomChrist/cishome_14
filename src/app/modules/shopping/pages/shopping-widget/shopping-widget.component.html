@@ -1,0 +1,15 @@
+<p-card (click)="open()" [style]="{height:'270px'}" >
+    <div style="text-align: center">
+        <i style="font-size: 4.2em; color: #0D47A1" ></i>
+        <img style="width: 160px;" src="/assets/icons/flaticon/shopping-cart.png">
+    </div>
+    <p-footer>
+        <button pButton
+                class="p-button-link"
+                style="width: 100%"
+                label="SHOPPING"
+                [routerLink]="['/','shopping']"
+                ></button>
+    </p-footer>
+</p-card>
+

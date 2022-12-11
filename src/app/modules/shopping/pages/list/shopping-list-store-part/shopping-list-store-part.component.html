@@ -1,0 +1,12 @@
+<p-divider align="left">
+    {{store.store}}
+</p-divider>
+
+<div class="grid">
+
+    <div *ngFor="let i of store.items" class="col-6">
+        <shopping-list-item-box [name]="i.name"></shopping-list-item-box>
+    </div>
+
+
+</div>

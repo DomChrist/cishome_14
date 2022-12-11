@@ -1,0 +1,7 @@
+p {
+    width: 125px;
+    text-overflow: clip;
+    /* Both of the following are required for text-overflow */
+    white-space: nowrap;
+    overflow: hidden;
+}
