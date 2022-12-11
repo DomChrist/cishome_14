@@ -3,7 +3,7 @@ import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HashLocationStrategy, LocationStrategy} from '@angular/common';
+import {HashLocationStrategy, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import {AppRoutingModule} from './app-routing.module';
 
 // PrimeNG Components for demos
@@ -146,6 +146,12 @@ import {MenuService} from './app.menu.service';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import {MessageService} from 'primeng/api';
+import {AuthModule} from './system/auth/auth.module';
+import {WdysModule} from './modules/wdys/wdys.module';
+import {CisAuthService} from './system/auth/cis-auth-service';
+import {BASE_PATH, Configuration} from './core/api/v1';
+import {environment} from '../environments/environment';
 
 FullCalendarModule.registerPlugins([
     dayGridPlugin,
@@ -240,7 +246,9 @@ FullCalendarModule.registerPlugins([
         TreeModule,
         TreeTableModule,
         VirtualScrollerModule,
-        AppCodeModule
+        AppCodeModule,
+        AuthModule,
+        WdysModule
     ],
     declarations: [
         AppComponent,
@@ -289,9 +297,22 @@ FullCalendarModule.registerPlugins([
         BlocksComponent
     ],
     providers: [
-        {provide: LocationStrategy, useClass: HashLocationStrategy},
+        {provide: LocationStrategy, useClass: PathLocationStrategy},
         CountryService, CustomerService, EventService, IconService, NodeService,
-        PhotoService, ProductService, MenuService
+        PhotoService, ProductService, MenuService, MessageService,
+        {provide: BASE_PATH , useValue: environment.cisHome.host },
+        {
+            provide: Configuration,
+            deps: [CisAuthService],
+            multi: false,
+            useFactory: (auth: CisAuthService) => new Configuration({
+                basePath: environment.cisHome.host,
+                credentials : {
+                    token : auth.plainToken
+                }
+            }
+            )
+        }
     ],
     bootstrap: [AppComponent]
 })

@@ -1,0 +1,2647 @@
+---
+openapi: 3.0.3
+info:
+  title: Quarkus CIS Home service
+  description: Quarkus ChristInformationSystem
+  contact:
+    name: Dominik Christ
+    email: dominik@christ-rlp.de
+  version: "1.0"
+security:
+- token: []
+tags:
+- name: Meeting
+- name: Participant
+- name: Profile
+- name: lists
+- name: lists/shopping/settlement
+- name: lists/todo
+- name: safe
+- name: school
+- name: shopping
+- name: wdys/meeting
+- name: wdys/meeting/notes
+- name: wdys/todo
+paths:
+  /api/auth/google/token:
+    post:
+      tags:
+      - Profile
+      parameters:
+      - name: code
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /api/auth/google/token/refresh:
+    post:
+      tags:
+      - Profile
+      responses:
+        "200":
+          description: OK
+  /api/auth/validate/token:
+    get:
+      tags:
+      - Profile
+      parameters:
+      - name: client
+        in: query
+        schema:
+          type: string
+      - name: code
+        in: query
+        schema:
+          type: string
+      - name: host
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /api/common/drive/google/drives:
+    get:
+      tags:
+      - General Drive Web Adapter
+      responses:
+        "200":
+          description: OK
+  /api/common/drive/google/files:
+    get:
+      tags:
+      - General Drive Web Adapter
+      responses:
+        "200":
+          description: OK
+  /api/common/drive/google/folders:
+    get:
+      tags:
+      - General Drive Web Adapter
+      parameters:
+      - name: folder
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /api/common/drive/google/upload:
+    post:
+      tags:
+      - General Drive Web Adapter
+      responses:
+        "201":
+          description: Created
+  /api/common/drive/google/upload/multipart:
+    post:
+      tags:
+      - General Drive Web Adapter
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoogleDriveFile'
+  /api/common/s3:
+    get:
+      tags:
+      - Aws S 3 Resource
+      responses:
+        "200":
+          description: OK
+  /api/hello:
+    get:
+      tags:
+      - Example Resource
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CisSystemUser'
+  /api/keygen:
+    get:
+      tags:
+      - Key Gen Web Adapter
+      parameters:
+      - name: plain
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/keygen/enrypt:
+    get:
+      tags:
+      - Key Gen Web Adapter
+      parameters:
+      - name: p
+        in: header
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /api/keygen/public:
+    get:
+      tags:
+      - Key Gen Web Adapter
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+  /api/list/default/cmd:
+    put:
+      tags:
+      - List Command Controller
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewList'
+      responses:
+        "200":
+          description: OK
+  /api/list/default/cmd/v2:
+    put:
+      tags:
+      - List Command Controller V 2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewList'
+      responses:
+        "200":
+          description: OK
+  /api/list/default/cmd/v2/{id}/add/item:
+    post:
+      tags:
+      - List Command Controller V 2
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewItem'
+      responses:
+        "200":
+          description: OK
+  /api/list/default/cmd/v2/{id}/buy:
+    post:
+      tags:
+      - List Command Controller V 2
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BuyItem'
+      responses:
+        "200":
+          description: OK
+  /api/list/default/cmd/v2/{id}/finish:
+    post:
+      tags:
+      - List Command Controller V 2
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /api/list/default/cmd/v2/{list}/remove/item/{id}:
+    delete:
+      tags:
+      - List Command Controller V 2
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: list
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /api/list/default/cmd/{id}/add/item:
+    post:
+      tags:
+      - List Command Controller
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewItem'
+      responses:
+        "200":
+          description: OK
+  /api/list/default/cmd/{id}/buy:
+    post:
+      tags:
+      - List Command Controller
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BuyItem'
+      responses:
+        "200":
+          description: OK
+  /api/list/default/cmd/{id}/finish:
+    post:
+      tags:
+      - List Command Controller
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /api/list/default/cmd/{list}/remove/item/{id}:
+    delete:
+      tags:
+      - List Command Controller
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: list
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /api/list/query/all:
+    get:
+      tags:
+      - lists
+      description: list of all lists
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListProjection'
+  /api/list/query/suggest/item:
+    get:
+      tags:
+      - lists
+      parameters:
+      - name: q
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /api/list/shopping/cmd/v1/list/{id}/add/item:
+    put:
+      tags:
+      - shopping
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddShoppingItem'
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - token:
+        - cis_list
+  /api/list/shopping/cmd/v1/list/{id}/bought:
+    put:
+      tags:
+      - shopping
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BuyItem'
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - token:
+        - cis_list
+  /api/list/shopping/cmd/v1/list/{id}/clear:
+    delete:
+      tags:
+      - shopping
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - token:
+        - cis_list
+  /api/list/shopping/cmd/v1/list/{id}/clear/store/{store}:
+    delete:
+      tags:
+      - shopping
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: store
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - token:
+        - cis_list
+  /api/list/shopping/cmd/v1/list/{id}/finished:
+    put:
+      tags:
+      - shopping
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - token:
+        - cis_list
+  /api/list/shopping/cmd/v1/list/{id}/remove/item/{itemId}:
+    delete:
+      tags:
+      - shopping
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: itemId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - token:
+        - cis_list
+  /api/list/shopping/cmd/v1/new:
+    put:
+      tags:
+      - shopping
+      description: create new list for subdomain
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewList'
+      responses:
+        "200":
+          description: OK
+  /api/list/shopping/settlement/v1/cmd:
+    post:
+      tags:
+      - lists/shopping/settlement
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewSettlementRequest'
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - token:
+        - cis_list
+  /api/list/shopping/settlement/v1/cmd/receipt/upload:
+    put:
+      tags:
+      - lists/shopping/settlement
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  $ref: '#/components/schemas/File'
+                name:
+                  type: string
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - token:
+        - cis_list
+  /api/list/shopping/store/v1/cmd/new:
+    post:
+      tags:
+      - Shopping Store Command Resource
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewStoreRequest'
+      responses:
+        "200":
+          description: OK
+  /api/list/shopping/store/v1/query/all:
+    get:
+      tags:
+      - shopping
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StoreAggregate'
+  /api/list/shopping/store/v1/query/id/{id}:
+    get:
+      tags:
+      - shopping
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreAggregate'
+  /api/list/shoppinglist/query/v1:
+    get:
+      tags:
+      - shopping
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShoppingListResponse'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - token:
+        - cis_list
+  /api/list/shoppinglist/query/v1/{id}:
+    get:
+      tags:
+      - shopping
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: view
+        in: query
+        schema:
+          default: agg
+          type: string
+        example: agg | store
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShoppingListStoreResponse'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - token:
+        - cis_list
+  /api/lists/meta/meta/modules:
+    get:
+      tags:
+      - lists
+      responses:
+        "200":
+          description: OK
+  /api/lists/todo/v1/all:
+    get:
+      tags:
+      - lists/todo
+      description: list all todos
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MultiTodoResponse'
+        "204": {}
+  /api/lists/todo/v1/list:
+    post:
+      tags:
+      - lists/todo
+      description: Create a new Todo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewTodoRequest'
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TodoResponse'
+  /api/lists/todo/v1/list/{id}:
+    get:
+      tags:
+      - lists/todo
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /api/lists/todo/v1/list/{id}/done:
+    put:
+      tags:
+      - lists/todo
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /api/meeting/activate/meeting/{meeting}/session/{session}:
+    get:
+      tags:
+      - Session Activation Controller
+      parameters:
+      - name: meeting
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: session
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+    post:
+      tags:
+      - Session Activation Controller
+      parameters:
+      - name: meeting
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: session
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /api/meeting/cmd/new:
+    post:
+      tags:
+      - wdys/meeting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMeetingCommand'
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - token:
+        - cis_meeting:write
+  /api/meeting/collaboration:
+    get:
+      tags:
+      - Meeting
+      responses:
+        "200":
+          description: OK
+  /api/meeting/collaboration/session/{session}:
+    get:
+      tags:
+      - Meeting
+      parameters:
+      - name: session
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: code
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /api/meeting/collaboration/session/{session}/chat:
+    post:
+      tags:
+      - Meeting
+      parameters:
+      - name: session
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: message
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /api/meeting/dashboard/query/countings:
+    get:
+      tags:
+      - Meeting
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MeetingDashboardCountJpaEntity'
+  /api/meeting/dashboard/query/lastEditedMeetings:
+    get:
+      tags:
+      - Meeting
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MeetingDashboardJpaEntity'
+  /api/meeting/dashboard/query/lastNotes:
+    get:
+      tags:
+      - Meeting
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LastNotesJpaEntity'
+  /api/meeting/dashboard/query/mostCommunications:
+    get:
+      tags:
+      - Meeting
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MostCommunicativeParticipantJpaEntity'
+  /api/meeting/dashboard/query/overdue:
+    get:
+      tags:
+      - Meeting
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OverDueJpaEntity'
+  /api/meeting/query:
+    get:
+      tags:
+      - wdys/meeting
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MeetingListResponse'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - token:
+        - cis_meeting
+  /api/meeting/query/search:
+    get:
+      tags:
+      - wdys/meeting
+      parameters:
+      - name: q
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MeetingProjection'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - token:
+        - cis_meeting
+  /api/meeting/query/{id}:
+    get:
+      tags:
+      - wdys/meeting
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Meeting'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - token:
+        - cis_meeting
+  /api/meeting/session/agenda/meeting/{id}/session/{sessionId}:
+    get:
+      tags:
+      - Meeting
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: sessionId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /api/meeting/session/agenda/meeting/{id}/session/{session}:
+    post:
+      tags:
+      - Meeting
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: session
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewAgendaPointRequest'
+      responses:
+        "200":
+          description: OK
+  /api/meeting/session/agenda/session/{session}/point/{point}/done:
+    put:
+      tags:
+      - Meeting
+      parameters:
+      - name: point
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: session
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /api/meeting/session/agenda/session/{session}/point/{point}/open:
+    put:
+      tags:
+      - Meeting
+      parameters:
+      - name: point
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: session
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /api/meeting/session/cmd/description:
+    post:
+      tags:
+      - wdys/meeting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSessionDescriptionCommand'
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - token:
+        - cis_meeting:write
+  /api/meeting/session/cmd/new:
+    post:
+      tags:
+      - wdys/meeting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddMeetingSessionCommand'
+      responses:
+        "201":
+          description: Session created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Meeting'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - token:
+        - cis_meeting:write
+  /api/meeting/session/cmd/participant/add:
+    post:
+      tags:
+      - wdys/meeting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddParticipantRequest'
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - token:
+        - cis_meeting:write
+  /api/meeting/timebooking/cmd/book:
+    post:
+      tags:
+      - Session Time Track Command Controller
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookTimeCommand'
+      responses:
+        "201": {}
+  /api/meeting/timebooking/query/meeting/{meetingId}:
+    get:
+      tags:
+      - Session Time Track Query Controller
+      parameters:
+      - name: meetingId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MeetingSessionTimeBooking'
+  /api/meeting/timebooking/query/session/{sessionId}:
+    get:
+      tags:
+      - Session Time Track Query Controller
+      parameters:
+      - name: sessionId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MeetingSessionTimeBooking'
+  /api/meeting/timebooking/query/stats/time/meeting/{id}:
+    get:
+      tags:
+      - Session Time Track Query Controller
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MeetingTimeValue'
+  /api/meeting/timebooking/query/stats/{type}/{value}:
+    get:
+      tags:
+      - Session Time Track Query Controller
+      parameters:
+      - name: type
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: value
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MeetingSessionTimeBooking'
+  /api/rabbitmq/send:
+    get:
+      tags:
+      - Rabbit Mq Publisher
+      parameters:
+      - name: message
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /api/school/math/answers/wrong:
+    post:
+      tags:
+      - school
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WrongAnswersRequest'
+      responses:
+        "200":
+          description: OK
+  /api/school/math/geteilt:
+    get:
+      tags:
+      - school
+      parameters:
+      - name: count
+        in: query
+        schema:
+          format: int32
+          default: 10
+          type: integer
+      - name: max
+        in: query
+        schema:
+          format: int32
+          default: 10
+          type: integer
+      - name: min
+        in: query
+        schema:
+          format: int32
+          default: 1
+          type: integer
+      responses:
+        "200":
+          description: OK
+  /api/school/math/mal:
+    get:
+      tags:
+      - school
+      parameters:
+      - name: count
+        in: query
+        schema:
+          format: int32
+          default: 10
+          type: integer
+      - name: max
+        in: query
+        schema:
+          format: int32
+          default: 10
+          type: integer
+      - name: min
+        in: query
+        schema:
+          format: int32
+          default: 1
+          type: integer
+      responses:
+        "200":
+          description: OK
+  /api/school/math/mal/multiplikator/{multiplikator}:
+    get:
+      tags:
+      - school
+      parameters:
+      - name: multiplikator
+        in: path
+        required: true
+        schema:
+          format: int32
+          type: integer
+      - name: count
+        in: query
+        schema:
+          format: int32
+          default: 10
+          type: integer
+      - name: max
+        in: query
+        schema:
+          format: int32
+          default: 10
+          type: integer
+      - name: min
+        in: query
+        schema:
+          format: int32
+          default: 1
+          type: integer
+      responses:
+        "200":
+          description: OK
+  /api/school/math/minus:
+    get:
+      tags:
+      - school
+      parameters:
+      - name: count
+        in: query
+        schema:
+          format: int32
+          default: 10
+          type: integer
+      - name: max
+        in: query
+        schema:
+          format: int32
+          default: 10
+          type: integer
+      - name: min
+        in: query
+        schema:
+          format: int32
+          default: 1
+          type: integer
+      responses:
+        "200":
+          description: OK
+  /api/school/math/mix:
+    get:
+      tags:
+      - school
+      parameters:
+      - name: count
+        in: query
+        schema:
+          format: int32
+          default: 10
+          type: integer
+      - name: max
+        in: query
+        schema:
+          format: int32
+          default: 10
+          type: integer
+      - name: min
+        in: query
+        schema:
+          format: int32
+          default: 1
+          type: integer
+      responses:
+        "200":
+          description: OK
+  /api/school/math/plus:
+    get:
+      tags:
+      - school
+      parameters:
+      - name: count
+        in: query
+        schema:
+          format: int32
+          default: 10
+          type: integer
+      - name: maxsum
+        in: query
+        schema:
+          format: int32
+          default: 1
+          type: integer
+      responses:
+        "200":
+          description: OK
+  /api/secret/note:
+    post:
+      tags:
+      - safe
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewSecretRequest'
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - token:
+        - cis_safe
+  /api/secret/note/{id}:
+    get:
+      tags:
+      - safe
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - token:
+        - cis_safe
+  /api/secret/note/{id}/item:
+    put:
+      tags:
+      - safe
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewItemRequest'
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - token:
+        - cis_safe
+  /api/secret/notes:
+    get:
+      tags:
+      - safe
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - token:
+        - cis_safe
+  /api/secret/search:
+    get:
+      tags:
+      - safe
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - token:
+        - cis_safe
+  /api/wdys/meetingnote/cmd/new:
+    post:
+      tags:
+      - wdys/meeting/notes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateNewMeetingNoteCommand'
+      responses:
+        "200":
+          description: OK
+  /api/wdys/meetingnote/query/meeting/{meetingID}:
+    get:
+      tags:
+      - wdys/meeting/notes
+      parameters:
+      - name: meetingID
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /api/wdys/meetingnote/query/session/{sessionID}:
+    get:
+      tags:
+      - wdys/meeting/notes
+      parameters:
+      - name: sessionID
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MeetingNote'
+  /api/wdys/participant/cmd/new:
+    post:
+      tags:
+      - Participant
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateParticipantCommand'
+      responses:
+        "200":
+          description: OK
+  /api/wdys/participant/query/all:
+    get:
+      tags:
+      - Participant
+      responses:
+        "200":
+          description: OK
+  /api/wdys/participant/query/search:
+    get:
+      tags:
+      - Participant
+      parameters:
+      - name: q
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /api/wdys/todo/cmd/add:
+    post:
+      tags:
+      - wdys/todo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMeetingTodoCommand'
+      responses:
+        "200":
+          description: OK
+  /api/wdys/todo/cmd/{todo}:
+    delete:
+      tags:
+      - wdys/todo
+      parameters:
+      - name: todo
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /api/wdys/todo/cmd/{todo}/done:
+    post:
+      tags:
+      - wdys/todo
+      parameters:
+      - name: todo
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /api/wdys/todo/cmd/{todo}/open:
+    post:
+      tags:
+      - wdys/todo
+      parameters:
+      - name: todo
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /api/wdys/todo/query/meeting:
+    get:
+      tags:
+      - wdys/todo
+      parameters:
+      - name: id
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content: {}
+  /api/wdys/todo/query/session:
+    get:
+      tags:
+      - wdys/todo
+      parameters:
+      - name: id
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content: {}
+  /api/weekplan/plan:
+    get:
+      tags:
+      - Weekplan Controller
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - token:
+        - cis_weekplan
+  /api/weekplan/plan/add/task:
+    put:
+      tags:
+      - Weekplan Controller
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateToDoRequestBody'
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - token:
+        - cis_weekplan
+  /api/weekplan/tasks:
+    get:
+      tags:
+      - Tasks Controller
+      responses:
+        "200":
+          description: OK
+  /api/weekplan/tasks/task/delete/{id}:
+    delete:
+      tags:
+      - Tasks Controller
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /api/weekplan/tasks/task/new:
+    put:
+      tags:
+      - Tasks Controller
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  format: binary
+                  type: string
+                fileName:
+                  type: string
+                name:
+                  type: string
+                description:
+                  type: string
+            encoding:
+              fileName:
+                contentType: text/plain
+              file:
+                contentType: application/octet-stream
+              name:
+                contentType: text/plain
+              description:
+                contentType: text/plain
+      responses:
+        "200":
+          description: OK
+  /api/weekplan/team:
+    get:
+      tags:
+      - Team Controller
+      responses:
+        "200":
+          description: OK
+components:
+  schemas:
+    AddMeetingSessionCommand:
+      type: object
+      properties:
+        reference:
+          type: string
+        meetingId:
+          type: string
+        description:
+          type: string
+        meetingDate:
+          $ref: '#/components/schemas/LocalDateTime'
+        meetingDateString:
+          type: string
+        participants:
+          type: array
+          items:
+            $ref: '#/components/schemas/Participant'
+    AddParticipantRequest:
+      type: object
+      properties:
+        meeting:
+          type: string
+        session:
+          type: string
+        participantId:
+          type: string
+    AddShoppingItem:
+      type: object
+      properties:
+        reference:
+          type: string
+        itemId:
+          type: string
+        itemName:
+          type: string
+        counter:
+          format: int32
+          type: integer
+        store:
+          type: string
+    AufgabeDto:
+      type: object
+      properties:
+        operation1:
+          format: int32
+          type: integer
+        operation2:
+          format: int32
+          type: integer
+        symbol:
+          type: string
+    BookTimeCommand:
+      type: object
+      properties:
+        reference:
+          type: string
+        meeting:
+          type: string
+        session:
+          type: string
+        description:
+          type: string
+        creator:
+          type: string
+        time:
+          format: int64
+          type: integer
+    BuyItem:
+      type: object
+      properties:
+        reference:
+          type: string
+        item:
+          type: string
+        itemName:
+          type: string
+        location:
+          $ref: '#/components/schemas/Location'
+    CisGroup:
+      type: object
+      properties:
+        value:
+          type: string
+    CisRoles:
+      type: object
+      properties:
+        roles:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+    CisSystemUser:
+      type: object
+      properties:
+        id:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        cisGroup:
+          $ref: '#/components/schemas/CisGroup'
+        roles:
+          $ref: '#/components/schemas/CisRoles'
+        group:
+          $ref: '#/components/schemas/CisUserGroup'
+        email:
+          type: string
+        name:
+          type: string
+        userName:
+          type: string
+    CisUserGroup:
+      type: object
+      properties:
+        groups:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+    CreateMeetingCommand:
+      type: object
+      properties:
+        reference:
+          type: string
+        meetingTime:
+          $ref: '#/components/schemas/LocalDateTime'
+        subject:
+          type: string
+        description:
+          type: string
+        participants:
+          type: array
+          items:
+            $ref: '#/components/schemas/Participant'
+        creator:
+          type: string
+    CreateMeetingTodoCommand:
+      type: object
+      properties:
+        reference:
+          type: string
+        meetingId:
+          type: string
+        sessionId:
+          type: string
+        description:
+          type: string
+        dueDate:
+          $ref: '#/components/schemas/LocalDateTime'
+        creator:
+          type: string
+    CreateNewMeetingNoteCommand:
+      type: object
+      properties:
+        reference:
+          type: string
+        meetingId:
+          type: string
+        sessionId:
+          type: string
+        note:
+          type: string
+        creator:
+          type: string
+        participantId:
+          type: string
+    CreateParticipantCommand:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        mail:
+          type: string
+        creator:
+          type: string
+    CreateToDoRequestBody:
+      type: object
+      properties:
+        weekplan:
+          type: string
+        taskId:
+          type: string
+        assigneeId:
+          type: string
+        day:
+          format: int32
+          type: integer
+    Creator:
+      type: object
+      properties:
+        value:
+          type: string
+    Email:
+      type: object
+      properties:
+        value:
+          type: string
+    File:
+      type: object
+      properties:
+        path:
+          type: string
+        invalid:
+          type: boolean
+        name:
+          type: string
+        parent:
+          type: string
+        parentFile:
+          $ref: '#/components/schemas/File'
+        absolute:
+          type: boolean
+        absolutePath:
+          type: string
+        absoluteFile:
+          $ref: '#/components/schemas/File'
+        canonicalPath:
+          type: string
+        canonicalFile:
+          $ref: '#/components/schemas/File'
+        directory:
+          type: boolean
+        file:
+          type: boolean
+        hidden:
+          type: boolean
+        totalSpace:
+          format: int64
+          type: integer
+        freeSpace:
+          format: int64
+          type: integer
+        usableSpace:
+          format: int64
+          type: integer
+    GoogleDriveFile:
+      type: object
+      properties:
+        kind:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        mimeType:
+          type: string
+    LastNotesJpaEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        meeting:
+          type: string
+        session:
+          type: string
+        note:
+          type: string
+        participantId:
+          type: string
+        created:
+          $ref: '#/components/schemas/LocalDateTime'
+        participant:
+          $ref: '#/components/schemas/ParticipantJpaEntity'
+        noteDescription:
+          $ref: '#/components/schemas/MeetingNoteDescription'
+        dayString:
+          type: string
+    ListProjection:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/ListType'
+        creator:
+          type: string
+        creatorGroup:
+          type: string
+    ListType:
+      enum:
+      - DEFAULT
+      - SHOPPING
+      - TODO
+      type: string
+    LocalDate:
+      format: date
+      type: string
+      example: 2022-03-10
+    LocalDateTime:
+      format: date-time
+      type: string
+      example: 2022-03-10T12:15:50
+    Location:
+      type: object
+      properties:
+        latitude:
+          format: double
+          type: number
+        longitude:
+          format: double
+          type: number
+    Meeting:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          $ref: '#/components/schemas/MeetingStatus'
+        meetingTopic:
+          $ref: '#/components/schemas/MeetingTopic'
+        creator:
+          $ref: '#/components/schemas/MeetingCreator'
+        session:
+          $ref: '#/components/schemas/SessionWindow'
+        created:
+          $ref: '#/components/schemas/LocalDateTime'
+        participants:
+          type: array
+          items:
+            $ref: '#/components/schemas/Participant'
+        dateRange:
+          $ref: '#/components/schemas/MeetingDateRange'
+    MeetingCreator:
+      type: object
+      properties:
+        value:
+          type: string
+    MeetingDashboardCountJpaEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        meetings:
+          format: int32
+          type: integer
+        activeMeetings:
+          format: int32
+          type: integer
+        sessions:
+          format: int32
+          type: integer
+        todos:
+          format: int32
+          type: integer
+        todosDone:
+          format: int32
+          type: integer
+        notes:
+          format: int32
+          type: integer
+    MeetingDashboardJpaEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        topic:
+          type: string
+        todosOpen:
+          format: int32
+          type: integer
+        todosDone:
+          format: int32
+          type: integer
+        localDate:
+          $ref: '#/components/schemas/LocalDate'
+        finishedInPercent:
+          format: double
+          type: number
+    MeetingDate:
+      type: object
+      properties:
+        value:
+          $ref: '#/components/schemas/LocalDateTime'
+    MeetingDateRange:
+      type: object
+      properties:
+        firstDate:
+          $ref: '#/components/schemas/LocalDateTime'
+        lastDate:
+          $ref: '#/components/schemas/LocalDateTime'
+        dateEqual:
+          type: boolean
+    MeetingDescription:
+      type: object
+      properties:
+        value:
+          type: string
+    MeetingId:
+      type: object
+      properties:
+        value:
+          type: string
+    MeetingListResponse:
+      type: object
+      properties:
+        order:
+          type: array
+          items:
+            $ref: '#/components/schemas/ORDERBY'
+        meetingList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Meeting'
+    MeetingNote:
+      type: object
+      properties:
+        creator:
+          type: string
+        created:
+          $ref: '#/components/schemas/LocalDateTime'
+        updated:
+          $ref: '#/components/schemas/LocalDateTime'
+        version:
+          format: int64
+          type: integer
+        id:
+          type: string
+        meeting:
+          $ref: '#/components/schemas/MeetingSessionId'
+        note:
+          $ref: '#/components/schemas/MeetingNoteDescription'
+        participant:
+          $ref: '#/components/schemas/Participant'
+    MeetingNoteDescription:
+      type: object
+      properties:
+        value:
+          type: string
+        mediumValue:
+          type: string
+        shortValue:
+          type: string
+    MeetingProjection:
+      type: object
+      properties:
+        id:
+          type: string
+        description:
+          type: string
+        searchLine:
+          type: string
+        sessionCount:
+          format: int32
+          type: integer
+        sessionFrom:
+          $ref: '#/components/schemas/LocalDate'
+        sessionTill:
+          $ref: '#/components/schemas/LocalDate'
+        todosTotal:
+          format: int32
+          type: integer
+        todosDone:
+          format: int32
+          type: integer
+        creator:
+          type: string
+        created:
+          $ref: '#/components/schemas/LocalDate'
+        updated:
+          $ref: '#/components/schemas/LocalDate'
+        version:
+          format: int32
+          type: integer
+    MeetingSession:
+      type: object
+      properties:
+        meetingSessionId:
+          type: string
+        meeting:
+          type: string
+        meetingDate:
+          $ref: '#/components/schemas/MeetingDate'
+        participantList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Participant'
+        description:
+          $ref: '#/components/schemas/MeetingDescription'
+        meetingName:
+          type: string
+        meetingId:
+          type: string
+        participants:
+          type: array
+          items:
+            $ref: '#/components/schemas/Participant'
+    MeetingSessionId:
+      type: object
+      properties:
+        meeting:
+          $ref: '#/components/schemas/MeetingId'
+        session:
+          $ref: '#/components/schemas/SessionId'
+    MeetingSessionTimeBooking:
+      type: object
+      properties:
+        session:
+          $ref: '#/components/schemas/MeetingSessionId'
+        time:
+          $ref: '#/components/schemas/MeetingTimeValue'
+        creator:
+          $ref: '#/components/schemas/Creator'
+        times:
+          type: array
+          items:
+            $ref: '#/components/schemas/SessionTimeStamp'
+    MeetingStatus:
+      enum:
+      - ACTIVE
+      - PAUSED
+      - CANCELED
+      - FINISHED
+      type: string
+    MeetingTimeValue:
+      type: object
+      properties:
+        time:
+          format: int64
+          type: integer
+        minutes:
+          format: int64
+          type: integer
+        formatted:
+          type: string
+    MeetingTodo:
+      type: object
+      properties:
+        creator:
+          $ref: '#/components/schemas/Creator'
+        created:
+          $ref: '#/components/schemas/LocalDateTime'
+        updated:
+          $ref: '#/components/schemas/LocalDateTime'
+        version:
+          format: int64
+          type: integer
+        id:
+          type: string
+        meetingSessionId:
+          $ref: '#/components/schemas/MeetingSessionId'
+        label:
+          type: string
+        done:
+          $ref: '#/components/schemas/TodoDone'
+        due:
+          $ref: '#/components/schemas/TodoDueDate'
+        checked:
+          type: boolean
+        overdue:
+          type: boolean
+    MeetingTodoAggregate:
+      type: object
+      properties:
+        meetingId:
+          $ref: '#/components/schemas/MeetingId'
+        todos:
+          type: array
+          items:
+            $ref: '#/components/schemas/MeetingTodo'
+        todoCounter:
+          format: int32
+          type: integer
+        finishedTodoCounter:
+          format: int64
+          type: integer
+        overdueCounter:
+          format: int64
+          type: integer
+    MeetingTopic:
+      type: object
+      properties:
+        value:
+          type: string
+    MostCommunicativeParticipantJpaEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        count:
+          format: int32
+          type: integer
+        firstName:
+          type: string
+        lastName:
+          type: string
+        mail:
+          type: string
+        initial:
+          type: string
+    MultiTodoResponse:
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/TodoResponse'
+        inCategories:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        categories:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        overdue:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+    NewAgendaPointRequest:
+      type: object
+      properties:
+        name:
+          type: string
+    NewItem:
+      type: object
+      properties:
+        reference:
+          type: string
+        itemReference:
+          type: string
+        itemName:
+          type: string
+    NewItemRequest:
+      type: object
+      properties:
+        description:
+          type: string
+        secret:
+          type: string
+    NewList:
+      type: object
+      properties:
+        reference:
+          type: string
+        name:
+          type: string
+    NewSecretRequest:
+      type: object
+      properties:
+        name:
+          type: string
+    NewSettlementRequest:
+      type: object
+      properties:
+        storeId:
+          type: string
+        amount:
+          format: double
+          type: number
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductPriceDto'
+    NewStoreRequest:
+      type: object
+      properties:
+        reference:
+          type: string
+        name:
+          type: string
+        link:
+          type: string
+    NewTodoRequest:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        important:
+          type: boolean
+        category:
+          type: string
+        due:
+          $ref: '#/components/schemas/LocalDateTime'
+    ORDERBY:
+      enum:
+      - UPDATED
+      - CREATED
+      - TOPIC
+      type: string
+    OverDueJpaEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        meeting:
+          type: string
+        session:
+          type: string
+        done:
+          type: boolean
+        label:
+          type: string
+        dueDays:
+          format: int32
+          type: integer
+        timeline:
+          format: int32
+          type: integer
+        dueDate:
+          $ref: '#/components/schemas/LocalDate'
+        created:
+          $ref: '#/components/schemas/LocalDate'
+        dueDaysTillDeadline:
+          format: double
+          type: number
+    Participant:
+      type: object
+      properties:
+        id:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        mail:
+          $ref: '#/components/schemas/Email'
+        creator:
+          type: string
+        initial:
+          type: string
+        fullName:
+          type: string
+    ParticipantJpaEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        mail:
+          type: string
+        creator:
+          type: string
+        version:
+          format: int64
+          type: integer
+        created:
+          $ref: '#/components/schemas/LocalDateTime'
+        updated:
+          $ref: '#/components/schemas/LocalDateTime'
+    ProductPriceDto:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        price:
+          format: double
+          type: number
+        count:
+          format: int32
+          type: integer
+    QuickFilter:
+      type: object
+      properties:
+        today:
+          type: boolean
+        overdue:
+          type: boolean
+        currentWeek:
+          type: boolean
+        nextWeek:
+          type: boolean
+        currentMonth:
+          type: boolean
+    SessionId:
+      type: object
+      properties:
+        value:
+          type: string
+    SessionTimeStamp:
+      type: object
+      properties:
+        id:
+          type: string
+        meetingSessionId:
+          $ref: '#/components/schemas/MeetingSessionId'
+        description:
+          type: string
+        date:
+          $ref: '#/components/schemas/LocalDate'
+        creator:
+          $ref: '#/components/schemas/Creator'
+        time:
+          $ref: '#/components/schemas/MeetingTimeValue'
+    SessionTodoAggregate:
+      type: object
+      properties:
+        sessionId:
+          $ref: '#/components/schemas/SessionId'
+        todos:
+          type: array
+          items:
+            $ref: '#/components/schemas/MeetingTodo'
+    SessionWindow:
+      type: object
+      properties:
+        sessions:
+          type: array
+          items:
+            $ref: '#/components/schemas/MeetingSession'
+        viewModel:
+          type: boolean
+        sessionCounter:
+          format: int32
+          type: integer
+        empty:
+          type: boolean
+        lengthOfOne:
+          type: boolean
+        first:
+          $ref: '#/components/schemas/MeetingSession'
+        count:
+          format: int32
+          type: integer
+    ShoppingListItemResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        counter:
+          format: int32
+          type: integer
+        store:
+          type: string
+    ShoppingListResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShoppingListItemResponse'
+        storeGroupedList:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/ShoppingListItemResponse'
+        stores:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+    ShoppingListStoreResponse:
+      type: object
+      properties:
+        listName:
+          type: string
+        stores:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShoppingStore'
+    ShoppingStore:
+      type: object
+      properties:
+        store:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShoppingListItemResponse'
+    Store:
+      type: object
+      properties:
+        storeId:
+          $ref: '#/components/schemas/StoreId'
+        name:
+          $ref: '#/components/schemas/StoreName'
+        link:
+          $ref: '#/components/schemas/StoreLink'
+    StoreAggregate:
+      type: object
+      properties:
+        store:
+          $ref: '#/components/schemas/Store'
+    StoreId:
+      type: object
+      properties:
+        id:
+          type: string
+        default:
+          type: boolean
+    StoreLink:
+      type: object
+      properties:
+        link:
+          type: string
+        searchPath:
+          type: string
+    StoreName:
+      type: object
+      properties:
+        name:
+          type: string
+        key:
+          type: string
+    TodoDone:
+      type: object
+      properties:
+        done:
+          type: boolean
+        finished:
+          $ref: '#/components/schemas/LocalDateTime'
+    TodoDueDate:
+      type: object
+      properties:
+        dueDate:
+          $ref: '#/components/schemas/LocalDateTime'
+        daysUntil:
+          format: int32
+          type: integer
+        deadlineExist:
+          type: boolean
+    TodoResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        category:
+          type: string
+        due:
+          $ref: '#/components/schemas/LocalDateTime'
+        important:
+          type: boolean
+        created:
+          $ref: '#/components/schemas/LocalDateTime'
+        overdue:
+          type: boolean
+        daysUntil:
+          format: int64
+          type: integer
+        filter:
+          $ref: '#/components/schemas/QuickFilter'
+    UpdateSessionDescriptionCommand:
+      type: object
+      properties:
+        reference:
+          type: string
+        description:
+          type: string
+        sessionId:
+          type: string
+    WrongAnswersRequest:
+      type: object
+      properties:
+        wrongAnswers:
+          type: array
+          items:
+            $ref: '#/components/schemas/AufgabeDto'
+        duration:
+          format: int64
+          type: integer
+        helpCounter:
+          format: int32
+          type: integer
+  securitySchemes:
+    SecurityScheme:
+      type: oauth2
+      description: Authentication
+      flows:
+        implicit:
+          authorizationUrl: http://test/protocol/openid-connect/auth
+          tokenUrl: http://test/protocol/openid-connect/token/introspect
+          refreshUrl: http://test/protocol/openid-connect/token
+    token:
+      type: apiKey
+      name: Authorization
+      in: header

@@ -30,10 +30,15 @@ import {AppTimelineDemoComponent} from './pages/app.timelinedemo.component';
 import {AppInvoiceComponent} from './pages/app.invoice.component';
 import {AppHelpComponent} from './pages/app.help.component';
 import {BlocksComponent} from './blocks/blocks/blocks.component';
+import {AuthGuard} from './system/auth/auth.guard';
 
 @NgModule({
     imports: [
         RouterModule.forRoot([
+            {path: 'auth/token' , loadChildren: () => import('./system/auth/auth.module').then( m => m.AuthModule)},
+            {path: 'lab' , loadChildren: () => import ('./modules/lab/lab.module').then( m => m.LabModule )},
+            {path: 'shopping' , loadChildren: () => import ('./modules/shopping/shopping.module').then( m => m.ShoppingModule )},
+
             {
                 path: '', component: AppMainComponent,
                 children: [
@@ -55,7 +60,7 @@ import {BlocksComponent} from './blocks/blocks/blocks.component';
                     {path: 'uikit/charts', component: ChartsDemoComponent},
                     {path: 'uikit/file', component: FileDemoComponent},
                     {path: 'utilities/icons', component: IconsComponent},
-                    {path: 'pages/crud', component: AppCrudComponent},
+                    {path: 'pages/crud', component: AppCrudComponent , canActivate: [AuthGuard]},
                     {path: 'pages/calendar', component: AppCalendarComponent},
                     {path: 'pages/timeline', component: AppTimelineDemoComponent},
                     {path: 'pages/invoice', component: AppInvoiceComponent},
