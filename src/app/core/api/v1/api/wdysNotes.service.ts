@@ -13,7 +13,7 @@
 
 import { Inject, Injectable, Optional }                      from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams,
-         HttpResponse, HttpEvent, HttpParameterCodec, HttpContext
+         HttpResponse, HttpEvent, HttpParameterCodec, HttpContext 
         }       from '@angular/common/http';
 import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
@@ -32,7 +32,7 @@ import { Configuration }                                     from '../configurat
 @Injectable({
   providedIn: 'root'
 })
-export class WdysMeetingNotesService {
+export class WdysNotesService {
 
     protected basePath = 'http://localhost';
     public defaultHeaders = new HttpHeaders();
@@ -94,7 +94,7 @@ export class WdysMeetingNotesService {
     }
 
     /**
-     * @param createNewMeetingNoteCommand
+     * @param createNewMeetingNoteCommand 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -164,7 +164,7 @@ export class WdysMeetingNotesService {
     }
 
     /**
-     * @param meetingID
+     * @param meetingID 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -227,13 +227,13 @@ export class WdysMeetingNotesService {
     }
 
     /**
-     * @param sessionID
+     * @param sessionID 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiWdysMeetingnoteQuerySessionSessionIDGet(sessionID: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<MeetingNote[]>;
-    public apiWdysMeetingnoteQuerySessionSessionIDGet(sessionID: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<MeetingNote[]>>;
-    public apiWdysMeetingnoteQuerySessionSessionIDGet(sessionID: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<MeetingNote[]>>;
+    public apiWdysMeetingnoteQuerySessionSessionIDGet(sessionID: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<MeetingNote>>;
+    public apiWdysMeetingnoteQuerySessionSessionIDGet(sessionID: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<MeetingNote>>>;
+    public apiWdysMeetingnoteQuerySessionSessionIDGet(sessionID: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<MeetingNote>>>;
     public apiWdysMeetingnoteQuerySessionSessionIDGet(sessionID: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (sessionID === null || sessionID === undefined) {
             throw new Error('Required parameter sessionID was null or undefined when calling apiWdysMeetingnoteQuerySessionSessionIDGet.');
@@ -278,7 +278,7 @@ export class WdysMeetingNotesService {
         }
 
         let localVarPath = `/api/wdys/meetingnote/query/session/${this.configuration.encodeParam({name: "sessionID", value: sessionID, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
-        return this.httpClient.request<MeetingNote>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<MeetingNote>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,

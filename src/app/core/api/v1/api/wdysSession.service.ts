@@ -13,15 +13,15 @@
 
 import { Inject, Injectable, Optional }                      from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams,
-         HttpResponse, HttpEvent, HttpParameterCodec, HttpContext
+         HttpResponse, HttpEvent, HttpParameterCodec, HttpContext 
         }       from '@angular/common/http';
 import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { CreateNewMeetingNoteCommand } from '../model/createNewMeetingNoteCommand';
+import { MeetingAgenda } from '../model/meetingAgenda';
 // @ts-ignore
-import { MeetingNote } from '../model/meetingNote';
+import { NewAgendaPointRequest } from '../model/newAgendaPointRequest';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -32,7 +32,7 @@ import { Configuration }                                     from '../configurat
 @Injectable({
   providedIn: 'root'
 })
-export class WdysMeetingNotesService {
+export class WdysSessionService {
 
     protected basePath = 'http://localhost';
     public defaultHeaders = new HttpHeaders();
@@ -94,14 +94,90 @@ export class WdysMeetingNotesService {
     }
 
     /**
-     * @param createNewMeetingNoteCommand
+     * @param id 
+     * @param sessionId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiWdysMeetingnoteCmdNewPost(createNewMeetingNoteCommand?: CreateNewMeetingNoteCommand, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public apiWdysMeetingnoteCmdNewPost(createNewMeetingNoteCommand?: CreateNewMeetingNoteCommand, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public apiWdysMeetingnoteCmdNewPost(createNewMeetingNoteCommand?: CreateNewMeetingNoteCommand, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public apiWdysMeetingnoteCmdNewPost(createNewMeetingNoteCommand?: CreateNewMeetingNoteCommand, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public apiMeetingSessionAgendaMeetingIdSessionSessionIdGet(id: string, sessionId: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<MeetingAgenda>;
+    public apiMeetingSessionAgendaMeetingIdSessionSessionIdGet(id: string, sessionId: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<MeetingAgenda>>;
+    public apiMeetingSessionAgendaMeetingIdSessionSessionIdGet(id: string, sessionId: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<MeetingAgenda>>;
+    public apiMeetingSessionAgendaMeetingIdSessionSessionIdGet(id: string, sessionId: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling apiMeetingSessionAgendaMeetingIdSessionSessionIdGet.');
+        }
+        if (sessionId === null || sessionId === undefined) {
+            throw new Error('Required parameter sessionId was null or undefined when calling apiMeetingSessionAgendaMeetingIdSessionSessionIdGet.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarCredential: string | undefined;
+        // authentication (token) required
+        localVarCredential = this.configuration.lookupCredential('token');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('Authorization', localVarCredential);
+        }
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/meeting/session/agenda/meeting/${this.configuration.encodeParam({name: "id", value: id, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/session/${this.configuration.encodeParam({name: "sessionId", value: sessionId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
+        return this.httpClient.request<MeetingAgenda>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param id 
+     * @param session 
+     * @param newAgendaPointRequest 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public apiMeetingSessionAgendaMeetingIdSessionSessionPost(id: string, session: string, newAgendaPointRequest?: NewAgendaPointRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public apiMeetingSessionAgendaMeetingIdSessionSessionPost(id: string, session: string, newAgendaPointRequest?: NewAgendaPointRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public apiMeetingSessionAgendaMeetingIdSessionSessionPost(id: string, session: string, newAgendaPointRequest?: NewAgendaPointRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public apiMeetingSessionAgendaMeetingIdSessionSessionPost(id: string, session: string, newAgendaPointRequest?: NewAgendaPointRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling apiMeetingSessionAgendaMeetingIdSessionSessionPost.');
+        }
+        if (session === null || session === undefined) {
+            throw new Error('Required parameter session was null or undefined when calling apiMeetingSessionAgendaMeetingIdSessionSessionPost.');
+        }
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -149,11 +225,11 @@ export class WdysMeetingNotesService {
             }
         }
 
-        let localVarPath = `/api/wdys/meetingnote/cmd/new`;
+        let localVarPath = `/api/meeting/session/agenda/meeting/${this.configuration.encodeParam({name: "id", value: id, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/session/${this.configuration.encodeParam({name: "session", value: session, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: createNewMeetingNoteCommand,
+                body: newAgendaPointRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -164,16 +240,20 @@ export class WdysMeetingNotesService {
     }
 
     /**
-     * @param meetingID
+     * @param point 
+     * @param session 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiWdysMeetingnoteQueryMeetingMeetingIDGet(meetingID: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public apiWdysMeetingnoteQueryMeetingMeetingIDGet(meetingID: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public apiWdysMeetingnoteQueryMeetingMeetingIDGet(meetingID: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public apiWdysMeetingnoteQueryMeetingMeetingIDGet(meetingID: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
-        if (meetingID === null || meetingID === undefined) {
-            throw new Error('Required parameter meetingID was null or undefined when calling apiWdysMeetingnoteQueryMeetingMeetingIDGet.');
+    public apiMeetingSessionAgendaSessionSessionPointPointDonePut(point: string, session: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public apiMeetingSessionAgendaSessionSessionPointPointDonePut(point: string, session: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public apiMeetingSessionAgendaSessionSessionPointPointDonePut(point: string, session: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public apiMeetingSessionAgendaSessionSessionPointPointDonePut(point: string, session: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+        if (point === null || point === undefined) {
+            throw new Error('Required parameter point was null or undefined when calling apiMeetingSessionAgendaSessionSessionPointPointDonePut.');
+        }
+        if (session === null || session === undefined) {
+            throw new Error('Required parameter session was null or undefined when calling apiMeetingSessionAgendaSessionSessionPointPointDonePut.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -213,8 +293,8 @@ export class WdysMeetingNotesService {
             }
         }
 
-        let localVarPath = `/api/wdys/meetingnote/query/meeting/${this.configuration.encodeParam({name: "meetingID", value: meetingID, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        let localVarPath = `/api/meeting/session/agenda/session/${this.configuration.encodeParam({name: "session", value: session, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/point/${this.configuration.encodeParam({name: "point", value: point, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/done`;
+        return this.httpClient.request<any>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -227,16 +307,20 @@ export class WdysMeetingNotesService {
     }
 
     /**
-     * @param sessionID
+     * @param point 
+     * @param session 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiWdysMeetingnoteQuerySessionSessionIDGet(sessionID: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<MeetingNote[]>;
-    public apiWdysMeetingnoteQuerySessionSessionIDGet(sessionID: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<MeetingNote[]>>;
-    public apiWdysMeetingnoteQuerySessionSessionIDGet(sessionID: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<MeetingNote[]>>;
-    public apiWdysMeetingnoteQuerySessionSessionIDGet(sessionID: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        if (sessionID === null || sessionID === undefined) {
-            throw new Error('Required parameter sessionID was null or undefined when calling apiWdysMeetingnoteQuerySessionSessionIDGet.');
+    public apiMeetingSessionAgendaSessionSessionPointPointOpenPut(point: string, session: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public apiMeetingSessionAgendaSessionSessionPointPointOpenPut(point: string, session: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public apiMeetingSessionAgendaSessionSessionPointPointOpenPut(point: string, session: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public apiMeetingSessionAgendaSessionSessionPointPointOpenPut(point: string, session: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+        if (point === null || point === undefined) {
+            throw new Error('Required parameter point was null or undefined when calling apiMeetingSessionAgendaSessionSessionPointPointOpenPut.');
+        }
+        if (session === null || session === undefined) {
+            throw new Error('Required parameter session was null or undefined when calling apiMeetingSessionAgendaSessionSessionPointPointOpenPut.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -252,7 +336,6 @@ export class WdysMeetingNotesService {
         if (localVarHttpHeaderAcceptSelected === undefined) {
             // to determine the Accept header
             const httpHeaderAccepts: string[] = [
-                'application/json'
             ];
             localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         }
@@ -277,8 +360,8 @@ export class WdysMeetingNotesService {
             }
         }
 
-        let localVarPath = `/api/wdys/meetingnote/query/session/${this.configuration.encodeParam({name: "sessionID", value: sessionID, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
-        return this.httpClient.request<MeetingNote>('get', `${this.configuration.basePath}${localVarPath}`,
+        let localVarPath = `/api/meeting/session/agenda/session/${this.configuration.encodeParam({name: "session", value: session, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/point/${this.configuration.encodeParam({name: "point", value: point, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/open`;
+        return this.httpClient.request<any>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
