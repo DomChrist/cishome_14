@@ -1,0 +1,28 @@
+
+.wdys-menu-top{
+    box-shadow:2px 2px 7px 1px silver;
+    margin-bottom: 5px;
+}
+
+.menu-button{
+    background: snow;
+    border: none;
+    cursor: pointer;
+}
+
+.menu-button:hover{
+    background: seashell;
+}
+
+.menu-button:active{
+    background: silver;
+}
+
+
+.menu-item{
+    font-size:2.0em;
+}
+
+.menu-item > em {
+    font-size:0.8em;
+}

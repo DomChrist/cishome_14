@@ -1,0 +1,69 @@
+<div *ngIf="!meetingAgenda && !loadFinished">
+
+    <div style="margin-bottom: 15px;"><p-skeleton height="10rem" width="100%"></p-skeleton></div>
+    <div style="margin-bottom: 15px;"><p-skeleton height="10rem" width="100%"></p-skeleton></div>
+    <div style="margin-bottom: 15px;"><p-skeleton height="10rem" width="100%"></p-skeleton></div>
+
+</div>
+
+
+
+<div style="margin: 5px;">
+
+</div>
+
+<div *ngIf="meetingAgenda || loadFinished">
+
+    <p-card>
+        <p-table *ngIf="meetingAgenda?.meetingPoints" [value]="meetingAgenda.meetingPoints">
+
+            <ng-template pTemplate="caption">
+                <p-divider align="left" type="dashed">
+                    <div class="p-d-inline-flex p-ai-center">
+                        <i class="pi pi-check p-mr-2"></i>
+                        <b>AGENDA</b>
+                    </div>
+                </p-divider>
+                <button pButton
+                        class="p-button-secondary p-button-rounded"
+                        icon="pi pi-plus"
+                        style="float: right"
+                        (click)="showOpenNewAgendaCommand()"></button>
+                <div style="clear: both"></div>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-a>
+                <tr>
+                    <td style="width: 35px;">
+                        <p-checkbox [binary]="true" [(ngModel)]="!a.status.open"></p-checkbox>
+                    </td>
+                    <td>
+                        <label style="font-size: 1.2em; margin-left: 5px;" >{{a.name}}</label>
+                    </td>
+                </tr>
+            </ng-template>
+
+        </p-table>
+    </p-card>
+
+</div>
+
+
+<p-dialog [(visible)]="showNewAgendaDialog" [style]="{minWidth:'400px'}" >
+
+    <div *ngIf="newAgendaCmd">
+        <input type="text" style="width: 100%" pInputText [(ngModel)]="newAgendaCmd.name" >
+    </div>
+
+    <div style="text-align: right; margin-top: 15px;" >
+        <button pButton
+                label="CANCEL"
+                (click)="showNewAgendaDialog = false"
+                class="p-button-link"></button>
+        <button pButton
+                class="p-button-success"
+                label="SAVE"
+                (click)="saveNewAgenda()"></button>
+    </div>
+
+</p-dialog>
