@@ -1,4 +1,5 @@
 <p-dialog appendTo="body" [(visible)]="visible" (onHide)="visibleChange.emit(false)" header="CREATE NEW PARTICIPANT" [style]="{width:'400px'}">
+
     <div class="m-top-10">
         <span class="p-float-label">
             <input type="search" id="first_name" pInputText [(ngModel)]="cmd.firstName" (keyup)="predictMail()" >

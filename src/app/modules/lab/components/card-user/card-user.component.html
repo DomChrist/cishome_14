@@ -1,0 +1,22 @@
+<p-skeleton *ngIf="!user" height="149px"></p-skeleton>
+
+
+<p-card *ngIf="user">
+
+    <p-avatar icon="pi-person" shape="circle" [label]="user.shortName" size="large"></p-avatar>
+
+    <label>
+        {{user.given_name}}
+    </label>
+
+    <label>
+        {{user.family_name}}
+    </label>
+
+    <p-divider></p-divider>
+
+    <div>
+        {{user.cisgroup}}
+    </div>
+
+</p-card>

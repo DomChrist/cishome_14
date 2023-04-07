@@ -48,10 +48,10 @@ export class WdysMeetingRootService {
       );
   }
 
-  public createMeeting( cmd: CreateMeetingCommand, onSuccess?: () => void ){
+  public createMeeting( cmd: CreateMeetingCommand, onSuccess?: ( body ) => void ){
       this.wdys.apiMeetingCmdNewPost( cmd , 'response' ).subscribe( {
           next: resp => {
-              onSuccess();
+              onSuccess( resp.body);
           }
       } );
   }

@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import {
+    AddMeetingSessionCommand, CreateNewMeetingNoteCommand,
     Meeting, MeetingAgenda,
     MeetingNote,
     MeetingSession, MeetingTodoAggregate,
     SessionTodoAggregate,
-    WdysMeetingService, WdysSessionService,
+    WdysMeetingService, WdysNotesService, WdysSessionService,
     WdysTodoService
 } from '../../../../../../core/api/v1';
 import {WdysMeetingNotesService} from '../../../../../../core/api/v1/api/wdysMeetingNotes.service';
+import {SessionDomainService} from "../../../meetingsession/application/session-domain.service";
 
 @Injectable({
   providedIn: 'root'
@@ -31,30 +33,70 @@ export class MeetingDomainService {
         private meetingService: WdysMeetingService,
         private todoService: WdysTodoService,
         private noteService: WdysMeetingNotesService,
-        private sessionService: WdysSessionService
+        private sessionService: WdysSessionService,
+        private createNoteService: WdysNotesService,
+
+        private sessionDomain: SessionDomainService
     ) { }
 
-    public openMeeting( meetingId: string , onComplete?: () => void ){
-        this.clear();
-        this.wdys.apiMeetingQueryIdGet(  meetingId , 'response').subscribe(
-            {
-                next: (m) => {
-                    this.$meeting = m.body;
-                    this.loadMeetingTodos();
-                    if ( onComplete !== undefined ){
-                        onComplete();
+    public openMeeting( meetingId: string , sessionId?: string,  options?: LoadOptions  ){
+        if ( options?.onStart instanceof Function ){
+            options?.onStart();
+        }
+
+        let loadMeeting = false;
+        let loadSession = false;
+
+        // sessionsload
+        if ( sessionId ){
+            if ( !this.$selectedSession || this.$selectedSession?.session?.meetingSessionId !== sessionId ){
+                this.clearSession();
+                loadSession = true;
+            }
+        } else {
+            loadSession = false;
+        }
+
+        if ( !this.$meeting || this.$meeting?.id !== meetingId ){
+            this.clear();
+            loadMeeting = true;
+        }
+
+        console.log( loadMeeting + ' / ' + loadSession );
+        if ( loadMeeting && loadSession ){
+            this.wdys.apiMeetingQueryIdGet(  meetingId , 'response').subscribe(
+                {
+                    next: (m) => {
+                        this.$meeting = m.body;
+                        this.loadMeetingTodos();
+                        if ( loadSession ){
+                            this.selectSession(sessionId);
+                            options?.onComplete();
+                        } else {
+                            options?.onComplete();
+                        }
                     }
                 }
-            }
-        );
+            );
+
+        } else if ( loadMeeting ){
+            this.wdys.apiMeetingQueryIdGet(  meetingId , 'response').subscribe(
+                {
+                    next: (m) => {
+                        this.$meeting = m.body;
+                        this.loadMeetingTodos();
+                        options?.onComplete();
+                    }
+                }
+            );
+
+        } else if ( loadSession ){
+            this.selectSession( sessionId );
+            options?.onComplete();
+        }
+
     }
 
-    public open( meeting: string , session: string ){
-        this.clear();
-        this.openMeeting( meeting , () => {
-            this.selectSession( session );
-        });
-    }
 
     public loadMeetingTodos(){
         this.todoService.apiWdysTodoQueryMeetingGet( this.$meeting.id , 'body' ).subscribe(
@@ -70,8 +112,22 @@ export class MeetingDomainService {
         this.clearSession();
     }
 
-    private clearSession(){
+    public clearSession(){
         this.$selectedSession = null;
+    }
+
+    public createNewSession( cmd: AddMeetingSessionCommand, onSuccess: () => void ){
+        this.meetingService.apiMeetingSessionCmdNewPost( cmd , 'response').subscribe(
+        {
+            next: (value) => onSuccess()
+        });
+    }
+
+    public cmd(): Commands {
+        return new Commands(
+          this,
+          this.wdys, this.createNoteService, this.todoService
+        );
     }
 
     private logAll(){
@@ -89,6 +145,8 @@ export class MeetingDomainService {
         this.loadSessionNotes( sessionId );
         this.loadSessionTodos( sessionId );
         this.loadSessionAgenda( this.meeting.id, sessionId );
+
+        this.sessionDomain.openSession( this.meeting , sessionId );
     }
 
     public loadSessionNotes( meetingSessionId: string ){
@@ -113,6 +171,7 @@ export class MeetingDomainService {
     }
 
 
+
     get meeting(): Meeting {
         return this.$meeting;
     }
@@ -125,7 +184,7 @@ export class MeetingDomainService {
     }
 
     get selectedSession(){
-        if( !this.$selectedSession ){
+        if ( !this.$selectedSession ){
             return undefined;
         }
         return this.$selectedSession;
@@ -156,4 +215,39 @@ export class SelectedSession{
     public sessionTodos: SessionTodoAggregate;
     public sessionAgenda: MeetingAgenda;
 
+}
+
+
+export class Commands {
+
+    constructor(
+        private domainService: MeetingDomainService,
+        private wdys: WdysMeetingService,
+        private createNoteService: WdysNotesService,
+
+        private todo: WdysTodoService) {
+        }
+
+
+    public createSessionNote( cmd: CreateNewMeetingNoteCommand, onSuccess?: () => void ){
+        cmd.meetingId = this.domainService.meeting.id;
+        cmd.sessionId = this.domainService.selectedSession.session.meetingSessionId;
+        this.createNoteService.apiWdysMeetingnoteCmdNewPost( cmd , 'response' ).subscribe(
+            {
+                next: () => {
+                    if ( onSuccess ){
+                        onSuccess();
+                    }
+                }
+            }
+        );
+    }
+
+}
+
+
+export interface LoadOptions{
+    onStart?: () => void;
+    onComplete?: () => void;
+    onFailure?: () => void;
 }

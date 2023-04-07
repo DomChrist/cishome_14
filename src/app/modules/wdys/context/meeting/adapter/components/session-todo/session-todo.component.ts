@@ -1,8 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {CreateMeetingTodoCommand} from '../../../../../../../core/api/v1';
+import {CreateMeetingTodoCommand, MeetingTodo} from '../../../../../../../core/api/v1';
 import {WdysMeetingRootService} from "../../../application/services/wdys-meeting-root.service";
 import {MeetingDomainService} from "../../../application/services/meeting-domain.service";
 import {ActivatedRoute} from "@angular/router";
+import {SessionDomainService} from "../../../../meetingsession/application/session-domain.service";
 
 @Component({
   selector: 'app-session-todo',
@@ -21,12 +22,12 @@ export class SessionTodoComponent implements OnInit {
 
   constructor( private root: WdysMeetingRootService,
                private router: ActivatedRoute,
+               private sessionDomain: SessionDomainService,
                private domain: MeetingDomainService) { }
 
   ngOnInit(): void {
       this.root.loadTodo(this.$sessionId);
       this.$selectedTodo = this.router.snapshot.queryParamMap.get('todo');
-      alert(this.$selectedTodo);
   }
 
   @Input()
@@ -40,11 +41,15 @@ export class SessionTodoComponent implements OnInit {
   }
 
   get todoList(){
-      return this.domain.sessionTodos?.todos;
+      return this.sessionDomain.session.todos;
   }
 
-    toggle(t: any) {
-
+    toggle(t: MeetingTodo) {
+      if( t.checked ){
+          this.sessionDomain.todoCommands.done( t.id );
+      } else {
+          this.sessionDomain.todoCommands.open( t.id );
+      }
     }
 
 
@@ -54,9 +59,14 @@ export class SessionTodoComponent implements OnInit {
 
 
     addNewTodo() {
-        this.cmd.sessionId = this.$sessionId;
-        this.cmd.meetingId = this.$meetingId;
-        this.root.saveSessionTodo( this.cmd );
+        this.sessionDomain.createSessionTodo( this.cmd , () => {
+            this.cmd.description = '';
+            this.cmd.dueDate = undefined;
+        });
+    }
+
+    delete(t: MeetingTodo) {
+        this.sessionDomain.todoCommands.delete( t.id );
     }
 }
 

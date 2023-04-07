@@ -1,0 +1,15 @@
+<label *ngIf="false">
+
+    <label>
+        <img [src]="image">
+        {{current.item.name}}
+        <div>
+            <label *ngFor="let a of current.item.artists">
+                {{a.name}}
+            </label>
+        </div>
+    </label>
+
+</label>
+
+

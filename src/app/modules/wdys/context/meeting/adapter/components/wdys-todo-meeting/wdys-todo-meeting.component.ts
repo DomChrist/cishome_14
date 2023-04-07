@@ -24,8 +24,6 @@ export class WdysTodoMeetingComponent implements OnInit {
   }
 
   public loadMeetingFromTodo( m: MeetingTodo ){
-      this.domain.open( m.meetingSessionId.meeting.value , m.meetingSessionId.session.value );
-      this.domain.clear();
       this.routing.navigate( ['/wdys/meeting/view', m.meetingSessionId.meeting.value, 'session', m.meetingSessionId.session.value] , {
           queryParams: {
               todo : m.id

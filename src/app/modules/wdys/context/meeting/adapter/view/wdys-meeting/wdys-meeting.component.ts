@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {MenuItem} from "primeng/api";
+import {MenuItem, PrimeIcons} from "primeng/api";
 import {WdysMeetingRootService} from '../../../application/services/wdys-meeting-root.service';
 import {MeetingService} from "../../../../../../../core/api/v1/api/meeting.service";
 import {Meeting, MeetingSession, MeetingTodoAggregate, WdysMeetingService} from "../../../../../../../core/api/v1";
@@ -106,6 +106,14 @@ export class WdysMeetingComponent implements OnInit {
 
     participants(s: MeetingSession) {
         return s.participants;
+    }
+
+    get icon(){
+        return PrimeIcons.ENVELOPE;
+    }
+
+    get color(){
+        return "#43B3D0FF";
     }
 
 }

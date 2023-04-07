@@ -1,0 +1,9 @@
+<div style="position: fixed; bottom: 0;">
+    <p-card>
+        <app-spotify-currently-stream [current]="current"></app-spotify-currently-stream>
+
+        <app-spotify-progress *ngIf="currentPlaying" [current]="currentPlaying"></app-spotify-progress>
+
+
+    </p-card>
+</div>

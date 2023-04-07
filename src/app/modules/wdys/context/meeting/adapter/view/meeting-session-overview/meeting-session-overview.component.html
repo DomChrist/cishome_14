@@ -20,60 +20,68 @@
         </div>
 
         <div class="col-12" style="text-align: right">
-            <app-time-tracker-button [sessionId]="session.meetingSessionId" [meetingId]="session.meetingId" ></app-time-tracker-button>
+            <app-time-tracking-button [sessionId]="session.meetingSessionId" [meetingId]="session.meetingId"></app-time-tracking-button>
             <label>&nbsp;</label>
             <p-chip icon="pi pi-calendar" [label]="session.meetingDate | date:'dd.MM.yyyy' "></p-chip>
             <label>&nbsp;</label>
+            <app-wdys-share-session></app-wdys-share-session>
             <app-meeting-session-share [session]="session"></app-meeting-session-share>
         </div>
 
 
-        <div class="col-6">
-            <div>
-                <div style="margin-top: 25px;">
-                    <p-divider align="left" type="dashed">
-                        <div class="p-d-inline-flex p-ai-center">
-                            <em class="pi pi-users p-mr-2"></em>
-                            <b>DESCRIPTION</b>
-                        </div>
-                    </p-divider>
-                    <textarea
-                        (keydown)="descriptionKeyDown($event)"
-                        style="width: 100%"
-                        pInputTextarea
-                        [(ngModel)]="session.description"></textarea>
-                    <div style="text-align: right">
-                        <button *ngIf="show_description_save_button"
-                                (click)="updateDescription()"
-                                pButton
-                                class="p-button-success"
-                                icon="pi pi-save"></button>
-                    </div>
-                </div>
 
 
-            </div>
-        </div>
-
-        <div class="col-6">
-            <div style="margin-top: 25px;">
-                <p-divider align="left" type="dashed">
-                    <div class="p-d-inline-flex p-ai-center">
-                        <i class="pi pi-users p-mr-2"></i>
-                        <b>PARTICIPANTS</b>
-                    </div>
-                </p-divider>
-                <div style="text-align: left">
-                    <p-avatar *ngFor="let p of session.participants" shape="circle" icon="pi pi-user" size="large" [label]="p.initial" [pTooltip]="p.fullName" [style]="{'background-color':'#2196F3', 'color': '#ffffff'}" ></p-avatar>
-                    <p-avatar shape="circle" (click)="show_participant_widget = !show_participant_widget" icon="pi pi-plus" size="large" ></p-avatar>
-                </div>
-            </div>
-        </div>
 
         <div class="col-12">
             <p-tabView>
                 <p-tabPanel header="Overview">
                     <div class="grid">
+
+                        <div class="col-6">
+                            <div>
+                                <div style="margin-top: 25px;">
+                                    <p-divider align="left" type="dashed">
+                                        <div class="p-d-inline-flex p-ai-center">
+                                            <em class="pi pi-users p-mr-2"></em>
+                                            <b>DESCRIPTION</b>
+                                        </div>
+                                    </p-divider>
+                                    <textarea
+                                        (keydown)="descriptionKeyDown($event)"
+                                        style="width: 100%"
+                                        pInputTextarea
+                                        [(ngModel)]="session.description"></textarea>
+                                    <div style="text-align: right">
+                                        <button *ngIf="show_description_save_button"
+                                                (click)="updateDescription()"
+                                                pButton
+                                                class="p-button-success"
+                                                icon="pi pi-save"></button>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
+                        <div class="col-6">
+                            <div style="margin-top: 25px;">
+                                <p-divider align="left" type="dashed">
+                                    <div class="p-d-inline-flex p-ai-center">
+                                        <em class="pi pi-users p-mr-2"></em>
+                                        <strong>PARTICIPANTS</strong>
+                                    </div>
+                                </p-divider>
+                                <div style="text-align: left">
+                                    <p-avatar *ngFor="let p of session.participants" shape="circle" icon="pi pi-user" size="large" [label]="p.initial" [pTooltip]="p.fullName" [style]="{'background-color':'#2196F3', 'color': '#ffffff'}" ></p-avatar>
+                                    <p-avatar shape="circle" (click)="show_participant_widget = !show_participant_widget" icon="pi pi-plus" size="large" ></p-avatar>
+                                </div>
+                            </div>
+                        </div>
+
+
+
                         <div class="sm:col-12 md:col-6">
                             <app-show-session-notes [sessionId]="session.meetingSessionId" type="card"></app-show-session-notes>
                         </div>
@@ -103,7 +111,7 @@
                     </div>
                 </p-tabPanel>
                 <p-tabPanel header="Timetracking">
-                    <app-time-tracker [sessionId]="sessionId" [meetingId]="meetingId"></app-time-tracker>
+                    <app-time-tracking [sessionId]="session.meetingSessionId" [meetingId]="sessionMeeting.id"></app-time-tracking>
                 </p-tabPanel>
             </p-tabView>
         </div>

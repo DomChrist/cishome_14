@@ -11,6 +11,11 @@ import {
     ParticipantPageComponent
 } from "./context/participants/adapter/pages/participant-page/participant-page.component";
 import {AddMeetingComponent} from "./context/meeting/adapter/view/add-meeting/add-meeting.component";
+import {AddSessionComponent} from "./context/meeting/adapter/view/add-session/add-session.component";
+import {WdysCollaboratingComponent} from "./context/collaborate/wdys-collaborating/wdys-collaborating.component";
+import {
+    ParticipantDetailPageComponent
+} from "./context/participants/adapter/pages/participant-detail-page/participant-detail-page.component";
 
 @NgModule({
     imports: [
@@ -19,10 +24,13 @@ import {AddMeetingComponent} from "./context/meeting/adapter/view/add-meeting/ad
                     {path: '' , component: WdysDashboardComponent},
                     {path: 'add/meeting' , component: AddMeetingComponent},
                     {path: 'participant' , component: ParticipantPageComponent},
+                    {path: 'participant/detail' , component: ParticipantDetailPageComponent},
                     {path: 'meeting/view/:id' , component: WdysMeetingComponent},
+                    {path: 'meeting/view/:id/add/session' , component: AddSessionComponent},
                     {path: 'meeting/view/:id/session/:session' , component: MeetingSessionOverviewComponent}
                 ]
-            }
+            },
+            {path: 'collaboration/session/:session', component: WdysCollaboratingComponent}
         ])
     ],
     exports: [RouterModule]

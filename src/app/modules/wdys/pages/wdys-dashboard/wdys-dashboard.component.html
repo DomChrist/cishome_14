@@ -16,7 +16,7 @@
 
 <div class="grid dashboard">
     <div class="col-12 md:col-6 lg:col-3">
-        <div class="p-grid p-nogutter card overview-box overview-box-1">
+        <div class="grid p-nogutter card overview-box overview-box-1">
             <span class="overview-box-name">Meetings</span>
             <span class="overview-box-count">{{count?.meetings}}</span>
             <span class="overview-box-badge">+30%</span>
@@ -24,7 +24,7 @@
         </div>
     </div>
     <div class="col-12 md:col-6 lg:col-3">
-        <div class="p-grid p-nogutter card overview-box overview-box-2">
+        <div class="grid p-nogutter card overview-box overview-box-2">
             <span class="overview-box-name">Sessions</span>
             <span class="overview-box-count">{{count?.sessions}}</span>
             <span class="overview-box-badge">+45%</span>
@@ -32,7 +32,7 @@
         </div>
     </div>
     <div class="col-12 md:col-6 lg:col-3">
-        <div class="p-grid p-nogutter card overview-box overview-box-3">
+        <div class="grid p-nogutter card overview-box overview-box-3">
             <span class="overview-box-name">Notes</span>
             <span class="overview-box-count">{{count?.notes}}</span>
             <span class="overview-box-badge">-75%</span>
@@ -40,7 +40,7 @@
         </div>
     </div>
     <div class="col-12 md:col-6 lg:col-3">
-        <div class="p-grid p-nogutter card overview-box overview-box-4">
+        <div class="grid p-nogutter card overview-box overview-box-4">
             <span class="overview-box-name">Todos</span>
             <span class="overview-box-count">{{count?.todos}}</span>
             <span class="overview-box-badge">25%</span>
@@ -71,7 +71,7 @@
             <ul class="activity-list">
                 <li *ngFor="let o of todos">
                     <div class="p-d-flex p-jc-between p-ai-center p-mb-3">
-                        <h5 style="cursor: pointer;" class="activity p-m-0" [routerLink]="['/','wdys','meeting','view',o.meeting,'session',o.session]" >
+                        <h5 style="cursor: pointer;" class="activity p-m-0" (click)="loadMeetingFromTodo(o)"  >
                             {{o.label}}
                             <em class="pi pi-link"></em>
                         </h5>
@@ -186,6 +186,4 @@
 
 </div>
 
-<!--
 <app-running-time-tracker></app-running-time-tracker>
--->

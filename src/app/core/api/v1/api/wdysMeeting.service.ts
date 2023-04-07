@@ -302,9 +302,9 @@ export class WdysMeetingService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiMeetingQuerySearchGet(q?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<MeetingProjection>;
-    public apiMeetingQuerySearchGet(q?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<MeetingProjection>>;
-    public apiMeetingQuerySearchGet(q?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<MeetingProjection>>;
+    public apiMeetingQuerySearchGet(q?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<MeetingProjection>>;
+    public apiMeetingQuerySearchGet(q?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<MeetingProjection>>>;
+    public apiMeetingQuerySearchGet(q?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<MeetingProjection>>>;
     public apiMeetingQuerySearchGet(q?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -352,7 +352,7 @@ export class WdysMeetingService {
         }
 
         let localVarPath = `/api/meeting/query/search`;
-        return this.httpClient.request<MeetingProjection>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<MeetingProjection>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,

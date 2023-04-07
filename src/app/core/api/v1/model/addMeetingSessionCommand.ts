@@ -16,7 +16,6 @@ export interface AddMeetingSessionCommand {
     reference?: string;
     meetingId?: string;
     description?: string;
-    meetingDate?: string;
     meetingDateString?: string;
     participants?: Array<Participant>;
 }

@@ -1,0 +1,16 @@
+<div *ngIf="current">
+
+    <img [src]="image" style="float: left">
+    <div style="float: left">
+        <label>{{current.item.name}}</label>
+        <div>
+            <label *ngFor="let a of current.item.artists">
+                {{a.name}}
+                <p>&nbsp;</p>
+            </label>
+        </div>
+    </div>
+    <div style="clear: both"></div>
+
+
+</div>

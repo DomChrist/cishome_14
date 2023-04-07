@@ -28,6 +28,7 @@
                     <p-checkbox
                         (onChange)="toggle(t)"
                         [binary]="true"
+                        [(ngModel)]="t.checked"
                         [value]="t.checked"
                         ></p-checkbox>
                 </td>

@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {WdysMeetingRootService} from "../../../application/services/wdys-meeting-root.service";
 import {MeetingNote} from "../../../../../../../core/api/v1";
 import {MeetingDomainService} from "../../../application/services/meeting-domain.service";
+import {SessionDomainService} from "../../../../meetingsession/application/session-domain.service";
 
 @Component({
   selector: 'app-show-session-notes',
@@ -15,13 +16,16 @@ export class ShowSessionNotesComponent implements OnInit {
   private $sessionId: string;
   private $notes: MeetingNote[];
 
+  private $type;
 
   constructor( private root: WdysMeetingRootService,
+               private sessionDomain: SessionDomainService,
                private domain: MeetingDomainService) {
 
   }
 
   ngOnInit(): void {
+
   }
 
   @Input()
@@ -29,15 +33,23 @@ export class ShowSessionNotesComponent implements OnInit {
   }
 
   get sessionId(){
-      return this.domain.selectedSession.session.meetingSessionId;
+      return this.sessionDomain.session.id;
   }
 
   get notes(): MeetingNote[]{
-      return this.domain.sessionNotes;
+      return this.sessionDomain.session.notes;
+  }
+
+  @Input()
+  set type( s: string ){
+      this.$type = s;
   }
 
   get type(){
-      return 'list';
+      if ( !this.$type ){
+          return 'list';
+      }
+      return this.$type;
   }
 
 }

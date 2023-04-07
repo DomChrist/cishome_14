@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import {AddShoppingItem, ListsService, ShoppingService, StoreAggregate} from '../../../core/api/v1';
+import {AddShoppingItem, StoreAggregate} from '../../../core/api/v1';
+import {ShoppingService} from "../../../core/api/v1/api/shopping.service";
+import {ListsService} from "../../../core/api/v1/api/lists.service";
 
 @Injectable({
   providedIn: 'root'

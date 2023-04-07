@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import {ListsShoppingSettlementService, NewSettlementRequest, ProductPriceDto} from '../../../core/api/v1';
+import {NewSettlementRequest, ProductPriceDto} from '../../../core/api/v1';
 import {Observable} from "rxjs";
 import {HttpResponse} from "@angular/common/http";
+import {ListsShoppingSettlementService} from "../../../core/api/v1/api/listsShoppingSettlement.service";
 
 @Injectable({
   providedIn: 'root'

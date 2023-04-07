@@ -31,7 +31,6 @@ import { SessionTodoComponent } from './context/meeting/adapter/components/sessi
 import {CalendarModule} from 'primeng/calendar';
 import {InputTextModule} from 'primeng/inputtext';
 import {FormsModule} from '@angular/forms';
-import { SessionCreateNoteDialogComponent } from './context/meeting/adapter/dialogs/session-create-note-dialog/session-create-note-dialog.component';
 import {EditorModule} from "primeng/editor";
 import { ParticipantComponent } from './context/meeting/adapter/view/participant/participant.component';
 import {SidebarModule} from "primeng/sidebar";
@@ -41,6 +40,19 @@ import { AddMeetingComponent } from './context/meeting/adapter/view/add-meeting/
 import { SearchParticipantDialogComponent } from './context/participants/adapter/dialogs/search-participant-dialog/search-participant-dialog.component';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import {InputTextareaModule} from "primeng/inputtextarea";
+import { AddSessionComponent } from './context/meeting/adapter/view/add-session/add-session.component';
+import {MessagesModule} from "primeng/messages";
+import { CreateSessionNoteComponent } from './context/meeting/adapter/components/create-session-note/create-session-note.component';
+import { WdysCollaboratingComponent } from './context/collaborate/wdys-collaborating/wdys-collaborating.component';
+import { WdysShareSessionComponent } from './context/meetingsession/adapter/components/wdys-share-session/wdys-share-session.component';
+import {OverlayPanelModule} from "primeng/overlaypanel";
+import {AccordionModule} from "primeng/accordion";
+import { ParticipantDetailPageComponent } from './context/participants/adapter/pages/participant-detail-page/participant-detail-page.component';
+import { ParticipantNotesComponent } from './context/participants/adapter/pages/participant-detail-page/participant-notes/participant-notes.component';
+import { ParticipantSessionComponent } from './context/participants/adapter/pages/participant-detail-page/participant-session/participant-session.component';
+import { TimeTrackingButtonComponent } from './context/timetracking/view/components/time-tracking-button/time-tracking-button.component';
+import { TimeTrackingComponent } from './context/timetracking/view/page/time-tracking/time-tracking.component';
+import { RunningTimeTrackerComponent } from './context/timetracking/view/components/running-time-tracker/running-time-tracker.component';
 
 
 
@@ -55,12 +67,21 @@ import {InputTextareaModule} from "primeng/inputtextarea";
     ShowSessionNotesComponent,
     MeetingAgendaOverviewComponent,
     SessionTodoComponent,
-    SessionCreateNoteDialogComponent,
     ParticipantComponent,
     ParticipantPageComponent,
     CreateParticipantDialogComponent,
     AddMeetingComponent,
-    SearchParticipantDialogComponent
+    SearchParticipantDialogComponent,
+    AddSessionComponent,
+    CreateSessionNoteComponent,
+    WdysCollaboratingComponent,
+    WdysShareSessionComponent,
+    ParticipantDetailPageComponent,
+    ParticipantNotesComponent,
+    ParticipantSessionComponent,
+    TimeTrackingButtonComponent,
+    TimeTrackingComponent,
+    RunningTimeTrackerComponent
   ],
     imports: [
         WdysRoutingModule,
@@ -90,7 +111,10 @@ import {InputTextareaModule} from "primeng/inputtextarea";
         FormsModule,
         EditorModule,
         SidebarModule,
-        AutoCompleteModule
+        AutoCompleteModule,
+        MessagesModule,
+        OverlayPanelModule,
+        AccordionModule
     ],
   exports: [WdysWidgetComponent]
 })

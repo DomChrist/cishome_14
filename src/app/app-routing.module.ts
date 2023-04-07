@@ -38,6 +38,8 @@ import {AuthGuard} from './system/auth/auth.guard';
             {path: 'auth/token' , loadChildren: () => import('./system/auth/auth.module').then( m => m.AuthModule)},
             {path: 'lab' , loadChildren: () => import ('./modules/lab/lab.module').then( m => m.LabModule )},
             {path: 'shopping' , loadChildren: () => import ('./modules/shopping/shopping.module').then( m => m.ShoppingModule )},
+            {path: 'wdys' , loadChildren: () => import ('./modules/wdys/wdys.module').then( m => m.WdysModule )},
+            {path: 'authentication' , loadChildren: () => import ('./modules/login/login.module').then( m => m.LoginModule )},
 
             {
                 path: '', component: AppMainComponent,

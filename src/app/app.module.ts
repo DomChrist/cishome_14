@@ -152,6 +152,7 @@ import {WdysModule} from './modules/wdys/wdys.module';
 import {CisAuthService} from './system/auth/cis-auth-service';
 import {BASE_PATH, Configuration} from './core/api/v1';
 import {environment} from '../environments/environment';
+import {LoginModule} from "./modules/login/login.module";
 
 FullCalendarModule.registerPlugins([
     dayGridPlugin,
@@ -248,7 +249,8 @@ FullCalendarModule.registerPlugins([
         VirtualScrollerModule,
         AppCodeModule,
         AuthModule,
-        WdysModule
+        WdysModule,
+        LoginModule
     ],
     declarations: [
         AppComponent,

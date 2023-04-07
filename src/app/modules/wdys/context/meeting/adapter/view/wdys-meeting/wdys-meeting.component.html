@@ -56,18 +56,18 @@
                 <div *ngIf="meeting.dateRange.dateEqual">
                     <p-chip icon="pi pi-calendar" [label]="meeting.dateRange.firstDate | date:'dd.MM.yyyy'"  styleClass="p-mr-2" ></p-chip>
                 </div>
-                <div *ngIf="!meeting.dateRange.dateEqual" class="p-grid">
+                <div *ngIf="!meeting.dateRange.dateEqual" class="grid">
                     <div class="col-4 calendar-time " style="text-align: center">
-                        <i class="pi pi-calendar"></i>
+                        <em class="pi pi-calendar"></em>
                         <div>
                             <label>{{meeting.dateRange.firstDate | date:'dd.MM.yyyy'}}</label>
                         </div>
                     </div>
                     <div class="col-4" style="text-align: center;">
-                        <i style="font-size: 4em;" class="pi pi-ellipsis-h"></i>
+                        <em style="font-size: 4em;" class="pi pi-ellipsis-h"></em>
                     </div>
                     <div class="col-4 calendar-time " style="text-align: center">
-                        <i class="pi pi-calendar-times"></i>
+                        <em class="pi pi-calendar-times"></em>
                         <div>
                             <label>{{meeting.dateRange.lastDate | date:'dd.MM.yyyy'}}</label>
                         </div>
@@ -75,7 +75,7 @@
                 </div>
             </p-card>
         </div>
-        <div class="p-col">
+        <div class="col-3">
             <p-card [style]="{height:'100%'}">
                 <p-divider align="left" type="dashed">
                     <div class="p-d-inline-flex p-ai-center">
@@ -88,7 +88,7 @@
                 </h1>
             </p-card>
         </div>
-        <div class="p-col">
+        <div class="col-6">
             <p-comp [style]="{height:'100%'}">
                 <p-divider align="left" type="dashed">
                     <div class="p-d-inline-flex p-ai-center">
@@ -130,11 +130,11 @@
         <div *ngIf="meeting?.session.lengthOfOne === false " class="col">
             <p-card >
                 <ng-template pTemplate="header">
-                    <img src="./assets/wdys/meeting.jpg" width="100%" height="300px">
+                    <img alt="image" src="./assets/wdys/meeting.jpg" width="100%" height="300px">
                     <p-divider align="center" type="dashed">
                         <div class="p-d-inline-flex p-ai-center">
-                            <i class="pi pi-comments p-mr-2"></i>
-                            <b>SESSIONS</b>
+                            <em class="pi pi-comments p-mr-2"></em>
+                            <strong>SESSIONS</strong>
                         </div>
                     </p-divider>
                 </ng-template>
@@ -149,7 +149,7 @@
                             <p-card [header]="m.meetingName" [subheader]="m.meetingDate">
                                 <p>{{m.description}}</p>
 
-                                <button pButton label="Read more" class="p-button-text" [routerLink]="['/app/wdys/meeting/view',meeting.id,'session',m.meetingSessionId]" ></button>
+                                <button pButton label="Read more" class="p-button-text" (click)="openSession(meeting.session.first.meetingSessionId)" ></button>
 
                                 <p-avatarGroup styleClass="p-mb-3">
                                     <p-avatar *ngFor="let p of participants(m)" [label]="p.initial"  size="large" [pTooltip]="p.firstName" shape="circle"></p-avatar>
@@ -173,6 +173,10 @@
     <div style="position: fixed; bottom: 100px; right: 100px;" class="speeddial-circle-demo">
         <p-speedDial  [model]="commandItems" radius="120" direction="up-left" type="quarter-circle" ></p-speedDial>
     </div>
+
+    <p-dialog [(visible)]="showNewMeetingDialog" [style]="{width:'480px'}">
+        <app-add-session></app-add-session>
+    </p-dialog>
 
 
 </div>

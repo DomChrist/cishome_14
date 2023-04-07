@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {WdysDashboardService} from "../../services/dashboard/wdys-dashboard.service";
 import {MenuItem} from "primeng/api";
 import {Router} from "@angular/router";
+import {MeetingTodo, OverDueJpaEntity} from "../../../../core/api/v1";
+import {MeetingDomainService} from "../../context/meeting/application/services/meeting-domain.service";
 
 @Component({
   selector: 'app-wdys-dashboard',
@@ -14,6 +16,7 @@ export class WdysDashboardComponent implements OnInit {
 
 
   constructor( private service: WdysDashboardService,
+               private domain: MeetingDomainService,
                private routing: Router) {
 
   }
@@ -32,6 +35,20 @@ export class WdysDashboardComponent implements OnInit {
   public newMeetingRouting(){
       this.routing.navigate( ['/wdys','add','meeting'] );
   }
+
+    public loadMeetingFromTodo( m: OverDueJpaEntity ){
+
+          this.domain.openMeeting( m.meeting , m.session , {
+              onComplete: () => {
+                  this.routing.navigate( ['/wdys/meeting/view', m.meeting, 'session', m.session ] , {
+                      queryParams: {
+                          todo : m.id
+                      }
+                  });
+              }
+          });
+
+    }
 
   get communications(){
       return this.service.mostCommunications;

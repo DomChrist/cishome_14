@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {CreateParticipantCommand, Participant, WdysParticipantService} from '../../../../../../core/api/v1';
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -8,16 +9,22 @@ export class ParticipantDomainService {
 
     private $participants: Participant[];
 
+    private $selectedParticipant: Participant;
+
 
   constructor(
-      private service: WdysParticipantService
+      private service: WdysParticipantService,
   ) {
+      this.reload();
+  }
+
+  private reload(){
       this.service.apiWdysParticipantQueryAllGet('response')
           .subscribe({
-             next: (resp) => {
-                 this.$participants = resp.body;
-                 console.log(this.$participants);
-             }
+              next: (resp) => {
+                  this.$participants = resp.body;
+                  console.log(this.$participants);
+              }
           });
   }
 
@@ -28,6 +35,7 @@ export class ParticipantDomainService {
               next: resp => {
                   if ( resp.status >= 200 && resp.status < 300 ){
                       onSuccess();
+                      this.reload();
                   } else {
                       onError();
                   }
@@ -37,7 +45,18 @@ export class ParticipantDomainService {
       );
   }
 
+  public loadSessionsWithParticipant( p: Participant ){
+      return this.service.apiWdysParticipantQueryParticipantParticipantSessionsGet( p.id , 'response');
+  }
 
+  public open( p: Participant ){
+      this.$selectedParticipant = p;
+  }
+
+
+  get selectedParticipant(){
+      return this.$selectedParticipant;
+  }
 
   get participants(){
       return this.$participants;

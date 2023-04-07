@@ -1,0 +1,35 @@
+<div class="layout-wrapper" [ngClass]="{'layout-wrapper-menu-active':false,
+                                        'layout-overlay-menu':false, 'p-ripple-disabled': false, 'p-input-filled': true}">
+
+    <app-lab-topbar></app-lab-topbar>
+
+
+
+    <div class="layout-main">
+        <div class="layout-main-content">
+
+            <div class="grid">
+
+                <div class="col col-12 md:col-12 lg:col-12">
+                    <app-card-user [user]="user"></app-card-user>
+                </div>
+
+                <div class="col col-12 md:col-4 lg:col-3">
+                    <app-spotify-auth></app-spotify-auth>
+                </div>
+
+                <div class="col col-12 md:col-4 lg:col-3">
+                    <app-wdys-widget></app-wdys-widget>
+                </div>
+                <div class="col col-12 md:col-4 lg:col-3">
+                    <app-shopping-widget></app-shopping-widget>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+

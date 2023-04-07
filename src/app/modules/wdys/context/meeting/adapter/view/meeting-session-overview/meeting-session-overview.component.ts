@@ -4,6 +4,7 @@ import {WdysMeetingRootService} from '../../../application/services/wdys-meeting
 import {MeetingSession, SessionWindow} from '../../../../../../../core/api/v1';
 import {MenuItem} from "primeng/api";
 import {MeetingDomainService} from '../../../application/services/meeting-domain.service';
+import {SessionDomainService} from "../../../../meetingsession/application/session-domain.service";
 
 @Component({
   selector: 'app-meeting-session-overview',
@@ -18,21 +19,28 @@ export class MeetingSessionOverviewComponent implements OnInit {
   constructor(
       private router: ActivatedRoute,
       private domain: MeetingDomainService,
-      private root: WdysMeetingRootService
+      private root: WdysMeetingRootService,
+      private sessionDomain: SessionDomainService
   ) { }
 
   ngOnInit(): void {
       const m = this.router.snapshot.paramMap.get('id');
       const s = this.router.snapshot.paramMap.get('session');
+      this.domain.clearSession();
       this.items = [
           {label: 'DASHBOARD', routerLink: ['/wdys']},
           {label: 'MEETING', routerLink: ['/wdys/meeting/view', m]},
           {label: 'SESSION', routerLink: ['/wdys/meeting/view', m , 'session', s ]},
       ];
 
-      if ( !this.domain.meeting && !this.domain.selectedSession ){
-          this.domain.open(m, s);
+      if ( !this.domain.meeting || !this.domain.selectedSession ){
+          this.domain.openMeeting(m, s);
       }
+
+      this.sessionDomain.openSession(this.domain.meeting , s);
+
+      console.log('participants');
+      console.log( this.domain.selectedSession.session?.participants );
 
   }
 
@@ -43,6 +51,10 @@ export class MeetingSessionOverviewComponent implements OnInit {
 
   get sessionMeeting(){
       return this.domain.meeting;
+  }
+
+  get participants(){
+      return this.session?.participants;
   }
 
 }

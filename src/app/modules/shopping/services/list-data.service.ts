@@ -3,11 +3,10 @@ import {
     AddShoppingItem,
     ListItemReadModel, ListReadModel,
     ShoppingListQueryResourceService,
-    ShoppingListStoreResponse,
-    ShoppingService,
     StoreAggregate, StoreItemDto
 } from '../../../core/api/v1';
 import {Subject} from "rxjs";
+import {ShoppingService} from "../../../core/api/v1/api/shopping.service";
 
 @Injectable({
   providedIn: 'root'

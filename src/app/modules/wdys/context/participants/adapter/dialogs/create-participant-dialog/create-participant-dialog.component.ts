@@ -41,12 +41,12 @@ export class CreateParticipantDialogComponent implements OnInit {
             .replace("Ä","Ae")
             .replace("Ü","Ue")
             .replace("Ö","Oe")
+            .replace("ß","s")
             .toLowerCase();
         return name;
     }
 
     public save(){
-
         this.domain.newParticipant( this.cmd , () => {
             this.message.add( {severity: 'success' , summary: ' Particpant created '} )
         } , () => {
